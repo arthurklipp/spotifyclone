@@ -44,7 +44,7 @@ export default function Login(){
                 <div class="row" id='meio'>
                   <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
                   <label class="form-check-label" for="exampleCheck1">Lembrar de mim</label>
-                  <button type="button" id='botaoLogin'  style={{background: "red"}} class="btn btn-primary btn-lg rounded-pill font-weight-bold">
+                  <button type="button" id='botaoLogin' class="btn btn-primary btn-lg rounded-pill font-weight-bold">
                     <div className='textoBotao' >ENTRAR</div>
                   </button>
                 </div>
