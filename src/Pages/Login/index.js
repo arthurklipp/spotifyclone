@@ -1,27 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './Login.css';
 
-function App() {
-  return (
-    <div className="App">
-      <Head/>
-      <Login/>
-    </div>
-  );
-}
 
-class Head extends React.Component{
-  render(){
-    return <div className='head'>
+function Head(){
+  
+    return (<div className='head'>
               <img className='logo' src='Spotify_Logo_RGB_Black.png'/>
             </div>
-  }
+    );
 }
 
-class Login extends React.Component{
-  render(){
-    return <div className='login'>
+export default function Login(){
+
+    return (
+    <div>
+        <Head/>
+        <div className='login'>
               <p className='font-weight-bold'>Para continuar, faça login no Spotify.</p>
               <div className='row'>
               <img className='icon' src='facebook.png'></img>
@@ -71,6 +65,8 @@ class Login extends React.Component{
                 </p>
                 </div>
           </div>
-  }
+    </div>
+   
+  );
+
 }
-export default App;
