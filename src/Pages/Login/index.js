@@ -16,7 +16,7 @@ export default function Login(){
     <div>
         <Head/>
         <div className='login'>
-              <p className='font-weight-bold'>Para continuar, faça login no Spotify.</p>
+              <p className='font-weight-bold text-center'>Para continuar, faça login no Spotify.</p>
               <div className='row'>
               <img className='icon' src='facebook.png'></img>
               <button type="button" id='botaoFacebook' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
