@@ -1,5 +1,6 @@
 import React from 'react';
 import './home.css';
+import Scroll from './scroll';
 function head(){
   
     return (<div className='head'>
@@ -19,7 +20,8 @@ export class Home extends React.Component{
   }
   render(){
     return <div>
-      <Albums capa={this.state.capa} album={this.state.album} artista={this.state.artista}/>
+      <div className='penis'></div>
+      <Scroll/>
     </div>
   }
 }

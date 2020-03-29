@@ -92,6 +92,7 @@ export class Scroll extends Component {
     const menu = this.menuItems;
 
     return (
+      <div>
         <ScrollMenu
           data={menu}
           arrowLeft={ArrowLeft}
@@ -99,6 +100,9 @@ export class Scroll extends Component {
           selected={selected}
           onSelect={this.onSelect}
         />
+        </div>
     );
   }
 }
+
+export default Scroll
