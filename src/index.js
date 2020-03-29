@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Login from './Pages/Login/index';
 import {Home} from './Pages/Home/index';
+import {Scroll} from './Pages/Home/scroll';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <Scroll />
   </React.StrictMode>,
   document.getElementById('root')
 );
