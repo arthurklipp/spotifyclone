@@ -1,6 +1,7 @@
 import React from 'react';
 import './home.css';
 import Scroll from './scroll';
+import LateralBar from './lateralBar';
 function head(){
   
     return (<div className='head'>
@@ -19,8 +20,8 @@ export class Home extends React.Component{
     };
   }
   render(){
-    return <div>
-      <div className='penis'></div>
+    return <div style={{display:'flex'}}>
+      <LateralBar/>
       <Scroll/>
     </div>
   }

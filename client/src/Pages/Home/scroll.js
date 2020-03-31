@@ -40,7 +40,7 @@ const MenuItem = ({capa,album, artista, selected}) => {
   return <div className='album'>
   <img className='albumArt'src={capa}/>
   <div className='textoAlbum'>{album}</div>
-  <div className='textoArtista'>{artista}</div>
+  <div className='texto'>{artista}</div>
 </div>
 };
 
@@ -92,7 +92,6 @@ export class Scroll extends Component {
     const menu = this.menuItems;
 
     return (
-      <div>
         <ScrollMenu
           data={menu}
           arrowLeft={ArrowLeft}
@@ -100,7 +99,6 @@ export class Scroll extends Component {
           selected={selected}
           onSelect={this.onSelect}
         />
-        </div>
     );
   }
 }
