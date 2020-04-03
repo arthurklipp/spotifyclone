@@ -1,7 +1,10 @@
 import React from 'react';
 import './home.css';
-import Scroll from './scroll';
-import LateralBar from './lateralBar';
+import Scroll from './Scroll/scroll';
+import LateralBar from './LateralBar/lateralBar';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+
 function head(){
   
     return (<div className='head'>
@@ -20,9 +23,10 @@ export class Home extends React.Component{
     };
   }
   render(){
-    return <div style={{display:'flex'}}>
+    return <div style={{display:'flexbox'}}>
       <LateralBar/>
       <Scroll/>
+      <Player/>
     </div>
   }
 }
@@ -45,6 +49,14 @@ class Albums extends React.Component{
         <div className='textoAlbum'>{this.props.album[2]}</div>
         <div className='textoArtista'>{this.props.artista[2]}</div>
       </div>
+    </div>
+  }
+}
+
+class Player extends React.Component{
+  render(){
+    return <div id='player'>
+      <AudioPlayer autoPlay src="Daughter.flac" layout="stacked-reverse" onPlay={e => console.log("onPlay")}/>
     </div>
   }
 }

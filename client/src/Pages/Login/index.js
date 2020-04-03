@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import './Login.css';
 
 
@@ -17,18 +18,22 @@ export default function Login(){
         <Head/>
         <div className='login'>
               <p className='font-weight-bold text-center'>Para continuar, faça login no Spotify.</p>
-              <div className='row'>
-              <img className='icon' src='facebook.png'></img>
-              <button type="button" id='botaoFacebook' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
-                <div className='textoBotao'>CONTINUAR COM O FACEBOOK.</div>
-                </button>
-              </div>
-              <div className='row'>
-                <img className='icon' src='apple.png'></img>
-              <button type="button" id='botaoApple' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
-                <div className='textoBotao'>CONTINUAR COM A APPLE</div>
-                </button>
-              </div>
+              <Link to="/home">
+                <div className='row'>
+                  <img className='icon' src='facebook.png'></img>
+                    <button type="button" id='botaoFacebook' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
+                      <div className='textoBotao'>CONTINUAR COM O FACEBOOK.</div>
+                    </button>
+                </div>
+              </Link>
+              <Link to="/home">
+                <div className='row'>
+                    <img className='icon' src='apple.png'></img>
+                    <button type="button" id='botaoApple' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
+                      <div className='textoBotao'>CONTINUAR COM A APPLE</div>
+                    </button>
+                </div>
+                </Link>
               <div className='row divisor'>
                 <div className='linhaMetade'/>
                 <p className='font-weight-bold' id='textoDivisor'>OU</p>
@@ -44,9 +49,11 @@ export default function Login(){
                 <div class="row" id='meio'>
                   <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
                   <label class="form-check-label" for="exampleCheck1">Lembrar de mim</label>
-                  <button type="button" id='botaoLogin' class="btn btn-primary btn-lg rounded-pill font-weight-bold">
-                    <div className='textoBotao' >ENTRAR</div>
-                  </button>
+                  <Link to="/home">
+                    <button type="button" id='botaoLogin' class="btn btn-primary btn-lg rounded-pill font-weight-bold">
+                      <div className='textoBotao' >ENTRAR</div>
+                    </button>
+                  </Link>
                 </div>
               </form>
               <div className='row divisor'>

@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Login from './Pages/Login/index';
 import {Home} from './Pages/Home/index';
-import {Scroll} from './Pages/Home/scroll';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Home/>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Switch>
+            <Route path="/" exact={true} component={Login} />
+            <Route path="/home" component={Home} />
+        </Switch>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

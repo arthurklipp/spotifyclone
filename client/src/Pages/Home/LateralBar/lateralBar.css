@@ -1,0 +1,59 @@
+.lateralBar{
+    width: 200px;
+    height: 65vh;
+    background-color: blue;
+    padding-left: 20px;
+}
+
+.header{
+    height: 50px;
+    color: white;
+    
+}
+
+.nav{
+    height: 100px;
+    margin-top: 20px;
+    background-color: green;
+}
+
+.fas{
+    color:rgba(255, 255, 255, .6);
+    margin-right: 15px;
+}
+
+.navItem{
+    display: flex;
+}
+
+.navScroll{
+    margin-top: 30px;
+    height: 300px;
+    overflow: auto;
+}
+
+.title{
+    color:rgba(255, 255, 255, .6);
+    font-size: 13px;
+    letter-spacing: 1.5px;
+}
+
+.novaPlaylist{
+    display: flex;
+    border-top: solid rgba(255, 255, 255, .6);
+    border-width: 1px;
+    height: 70px;
+    color:rgba(255, 255, 255, .6);
+    background-color: green;
+}
+
+.espaco{
+    margin-top: auto;
+    margin-bottom:auto;
+    margin-left: 20px;
+    background-color: greenyellow;
+}
+.footer{
+    width: 200px;
+}
+    
