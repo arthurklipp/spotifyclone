@@ -23,10 +23,10 @@ export class Home extends React.Component{
     };
   }
   render(){
-    return <div style={{display:'flexbox'}}>
+    return <div className="layout">
       <LateralBar/>
       <Scroll/>
-      <Player/>
+      <AudioPlayer layout="stacked-reverse" className="player" src="Daughter.flac"/>
     </div>
   }
 }
@@ -49,14 +49,6 @@ class Albums extends React.Component{
         <div className='textoAlbum'>{this.props.album[2]}</div>
         <div className='textoArtista'>{this.props.artista[2]}</div>
       </div>
-    </div>
-  }
-}
-
-class Player extends React.Component{
-  render(){
-    return <div id='player'>
-      <AudioPlayer autoPlay src="Daughter.flac" layout="stacked-reverse" onPlay={e => console.log("onPlay")}/>
     </div>
   }
 }

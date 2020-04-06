@@ -6,7 +6,7 @@
   border: none;
 }
 .menu-item.active {
-  border: 1px green solid;
+  border: 1px
 }
 
 .scroll-menu-arrow {
@@ -15,9 +15,9 @@
 }
 
 .horizontal-menu{
-  width: 1000px;
+  width: 60vw;
+  grid-area: s;
   margin-left: auto;
   margin-right: auto;
   height: 300px;
-  background-color: red;
 }

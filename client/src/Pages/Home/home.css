@@ -37,6 +37,16 @@
   }
 }
 
+.layout{
+  background-color: rgba(0, 0, 0, .9);
+  display: grid;
+  grid-template-columns: 200px 64vw 374px;
+  grid-template-rows: 10vh 78vh 94px;
+  grid-template-areas: "m . ."
+                       "m s ."
+                       "m p p" ;
+}
+
 .albumArt{
   width: 180px;
   margin-left: auto;
@@ -64,12 +74,6 @@
   color:rgba(255, 255, 255, .6);
 }
 
-body{
-  background-color: rgba(0, 0, 0, .9);
-}
-
-#player{
-  background-color: yellow;
-  margin-top: auto;
-  margin-right: auto;
+.player{
+  grid-area: p;
 }
