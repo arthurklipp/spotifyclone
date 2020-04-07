@@ -35,7 +35,7 @@ app.post('/login', (req, res)=>{
 //MIDLEWARE QUE VERIFICA SE O USUÁRIO ESTÁ LOGADO
 app.use((req, res, next)=>{
     if(!req.session.logged){
-        res.send({message: "Você precisa realizar o login para ver esta página"})
+        res.redirect('http://localhost:3000')//redireciona pra pagina de login
     }else{
         next();
     }
