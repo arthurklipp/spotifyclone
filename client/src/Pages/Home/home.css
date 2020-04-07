@@ -38,12 +38,12 @@
 }
 
 .layout{
-  background-color: rgba(0, 0, 0, .9);
+  background-color: rgb(24, 24, 24);
   display: grid;
-  grid-template-columns: 200px 64vw 374px;
+  grid-template-columns: 200px 100fr 260px;
   grid-template-rows: 10vh 78vh 94px;
-  grid-template-areas: "m . ."
-                       "m s ."
+  grid-template-areas: "m . a"
+                       "m s a"
                        "m p p" ;
 }
 
@@ -76,4 +76,8 @@
 
 .player{
   grid-area: p;
+}
+
+.branco{
+  color: rgb(225,225,225);
 }

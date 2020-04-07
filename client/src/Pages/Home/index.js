@@ -2,6 +2,7 @@ import React from 'react';
 import './home.css';
 import Scroll from './Scroll/scroll';
 import LateralBar from './LateralBar/lateralBar';
+import Aside from './Aside/aside';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
@@ -27,6 +28,7 @@ export class Home extends React.Component{
       <LateralBar/>
       <Scroll/>
       <AudioPlayer layout="stacked-reverse" className="player" src="Daughter.flac"/>
+      <Aside/>
     </div>
   }
 }

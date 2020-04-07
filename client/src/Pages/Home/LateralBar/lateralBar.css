@@ -3,6 +3,7 @@
     height: 65vh;
     padding-left: 20px;
     grid-area: m;
+    background: rgb(18, 18, 18);
 }
 
 .header{
@@ -44,6 +45,7 @@
     height: 70px;
     width: 200px;
     color:rgba(255, 255, 255, .6);
+    background: rgb(18, 18, 18);
 }
 
 .espaco{

@@ -1,0 +1,4 @@
+#aside{
+    grid-area: a;
+    background-image: linear-gradient(black , rgb(50,50,50),black);
+  }
