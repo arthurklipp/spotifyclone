@@ -37,6 +37,16 @@
   }
 }
 
+.layout{
+  background-color: rgb(24, 24, 24);
+  display: grid;
+  grid-template-columns: 200px 100fr 260px;
+  grid-template-rows: 10vh 78vh 94px;
+  grid-template-areas: "m . a"
+                       "m s a"
+                       "m p p" ;
+}
+
 .albumArt{
   width: 180px;
   margin-left: auto;
@@ -60,10 +70,14 @@
   text-decoration: underline;
 }
 
-.textoArtista{
+.texto{
   color:rgba(255, 255, 255, .6);
 }
 
-body{
-  background-color: rgba(0, 0, 0, .9);
+.player{
+  grid-area: p;
+}
+
+.branco{
+  color: rgb(225,225,225);
 }

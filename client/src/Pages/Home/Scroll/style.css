@@ -1,0 +1,23 @@
+.menu-item {
+  padding: 0 40px;
+  margin: 5px 10px;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+}
+.menu-item.active {
+  border: 1px
+}
+
+.scroll-menu-arrow {
+  padding: 20px;
+  cursor: pointer;
+}
+
+.horizontal-menu{
+  width: 60vw;
+  grid-area: s;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+}
