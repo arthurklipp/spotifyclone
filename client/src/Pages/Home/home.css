@@ -75,7 +75,10 @@
 }
 
 .player{
+  position: fixed;
+  bottom: 0;
   grid-area: p;
+  z-index: 5;
 }
 
 .branco{

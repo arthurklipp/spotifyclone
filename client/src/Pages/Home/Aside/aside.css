@@ -1,4 +1,7 @@
 #aside{
+    position: fixed;
+    right: 0;
+    height: 100vh;
     grid-area: a;
     background-image: linear-gradient(black , rgb(50,50,50),black);
   }
