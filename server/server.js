@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 const secret = 'shhh!';
-// const session = require('express-session');
+
 
 const app = express();
 
@@ -10,6 +10,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//login com basic authorization
 app.get('/login', (req, res)=>{
     if(!req.headers.authorization){
         res.send("Nenhuma credencial enviada!");
