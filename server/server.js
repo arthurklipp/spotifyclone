@@ -1,14 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const secret = 'shhh!';
 
+const authController = require('./src/controllers/authController');
 
 const app = express();
 
 //BODY PARSER
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+
 
 
 app.use((req, res, next) => {
@@ -58,23 +61,7 @@ app.use((req, res, next)=>{
     })
 })
 
-app.get('/teste', (req, res)=>{
-    console.log("ID DO USUÁRIO: ", req.userId);
-    res.send("Recurso enviado!!");
-})
 
-
-
-// Example fetch with authorization header:
-
-// fetch('URL_GOES_HERE', { 
-//    method: 'post', 
-//    headers: new Headers({
-//      'Authorization': 'Basic '+btoa('username:password'), 
-//      'Content-Type': 'application/x-www-form-urlencoded'
-//    }), 
-//    body: 'A=1&B=2'
-//  });
 
 
 
