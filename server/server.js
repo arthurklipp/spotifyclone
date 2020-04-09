@@ -10,14 +10,26 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+app.use((req, res, next) => {
+	//Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "*");
+	//Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+   
+    next();
+});
+
 //login com basic authorization
 app.get('/login', (req, res)=>{
     if(!req.headers.authorization){
         res.send("Nenhuma credencial enviada!");
     }else{
+        console.log(req.headers.authorization);
         //pega o token do basic authorization que veio no header da requisição
         const [hashType, hash] = req.headers.authorization.split(' ');
-        
+        console.log(hash);
         //converte o token do header para termos acesso aos dados do usuário(credential[0] = email e credential[1] = password)
         const credentials = Buffer.from(hash, 'base64').toString().split(':');
         
@@ -27,7 +39,7 @@ app.get('/login', (req, res)=>{
             res.send({auth: true, token: token});
 
         }else{
-            res.send('Login inválido!');
+            res.send({auth: false, message:'Login inválido!'});
         }
     }
   
