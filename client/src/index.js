@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { isAuthenticated } from './auth';
 import Login from './Pages/Login/index';
 import {Home} from './Pages/Home/index';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
+const PrivateRoute = ({component: Component, ... rest}) => (
+  <Route {... rest} render={props =>(
+    isAuthenticated() ? (
+      <Component {... props} />
+    ) : (
+      <Redirect to={{ pathname:'/', state: { from: props.location } }} />
+    )
+  )}/>
+)
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
             <Route path="/" exact={true} component={Login} />
-            <Route path="/home" component={Home} />
+            <PrivateRoute  path="/home" component={Home}/>
         </Switch>
   </BrowserRouter>,
   document.getElementById('root')

@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 
@@ -16,26 +16,28 @@ export class Login extends Component{
     super(props);
     this.state={
       email:'',
-      senha:''
+      senha:'',
+      response:''
     };
     this.login = this.login.bind(this);
   }
-  login(){
-      const email=this.state.email;
-      const senha=this.state.senha;
-      async function a(){
-        let request = await fetch('http://localhost:8080/login', { 
-                headers: new Headers({
-                    'Authorization': "Basic " + window.btoa(email+':'+senha), 
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }), 
-                });
+  async login(){
+    let request = await fetch('http://localhost:8080/login', { 
+      headers: new Headers({
+          'Authorization': "Basic " + window.btoa(this.state.email+':'+this.state.senha), 
+          'Content-Type': 'application/x-www-form-urlencoded'
+      }), 
+      });
 
-                let response = await request.json();
-                console.log(response);
-      }
-      a();
-  }
+      var resposta = await request.json();
+      if(resposta.auth){
+        localStorage.setItem('login',JSON.stringify(resposta));
+        window.location.href = "/home";
+      }else{
+        localStorage.setItem('login',JSON.stringify(resposta));
+        alert(resposta.message);
+      };
+}
     render(){
     return (
     <div>
