@@ -5,18 +5,6 @@ const User = require('../models/user');
 
 const authController = express.Router();
 
-// authController.post('/teste', async (req, res)=>{
-//     console.log(req.body)
-//     try{
-//         const user = await User.create(req.body);
-//         console.log("hi", user)
-//         res.send({ user });
-
-//     }catch(err){
-//         return res.send({error: err.message})
-//     }
-// });
-
 //login com basic authorization
 authController.get('/login', async (req, res)=>{
     if(!req.headers.authorization){
@@ -42,6 +30,16 @@ authController.get('/login', async (req, res)=>{
  
     }
   
+})
+
+authController.post('/register', async (req, res)=>{
+    try{
+        const user = await User.create(req.body);
+        res.send({message:"Cadastro efetuado com sucesso!"});
+    }catch(err){
+        res.send({message: "Erro", error: err.message})
+    }
+    
 })
 
 module.exports = authController;

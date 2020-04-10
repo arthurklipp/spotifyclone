@@ -44,22 +44,21 @@ export class Login extends Component{
         <Head/>
         <div className='login'>
               <p className='font-weight-bold text-center'>Para continuar, faça login no Spotify.</p>
-              <Link to="/home">
+              
                 <div className='row'>
                   <img className='icon' src='facebook.png'></img>
                     <button type="button" id='botaoFacebook' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
                       <div className='textoBotao'>CONTINUAR COM O FACEBOOK.</div>
                     </button>
                 </div>
-              </Link>
-              <Link to="/home">
+              
                 <div className='row'>
                     <img className='icon' src='apple.png'></img>
                     <button type="button" id='botaoApple' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
                       <div className='textoBotao'>CONTINUAR COM A APPLE</div>
                     </button>
                 </div>
-                </Link>
+                
               <div className='row divisor'>
                 <div className='linhaMetade'/>
                 <p className='font-weight-bold' id='textoDivisor'>OU</p>
@@ -86,11 +85,16 @@ export class Login extends Component{
                 <div className='row divisor'>
                   <div className='linha'/>
                 </div>
-                <div className='row rodape'>
-                  <h6 id='textoRodape'>Não tem uma conta?</h6>
-                  <button type="button" id='botaoCadastro' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
-                  <div className='textoBotao'>INSCREVER-SE NO SPOTIFY</div>
-                </button>
+                <div className='rodape'>
+                 
+                    <h6 style={{textAlign: "center"}} id='textoRodape'>Não tem uma conta?</h6>
+                 
+                  <Link to="/register">
+                    <button type="button" id='botaoCadastro' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
+                      <div className='textoBotao'>INSCREVER-SE NO SPOTIFY</div>
+                    </button>
+                  </Link>
+                  
                 <p className='finalRodape'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ultrices et velit quis condimentum. Morbi placerat suscipit posuere. Curabitur tincidunt lectus sit amet dapibus pretium. Aliquam tristique quis sem ac
                 </p>
