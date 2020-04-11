@@ -1,7 +1,17 @@
 #aside{
-    position: fixed;
-    right: 0;
-    height: 100vh;
+    display: flex;
+    align-items: center;
     grid-area: a;
     background-image: linear-gradient(black , rgb(50,50,50),black);
+  }
+
+  #botaoAmigos{
+    background-color: transparent;
+    width: 225px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #textoAside{
+    margin-left: 50px;
   }

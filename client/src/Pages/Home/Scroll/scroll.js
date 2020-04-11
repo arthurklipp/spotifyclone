@@ -14,24 +14,24 @@ const list = [
   { capa: 'albums/albumArt3.png',
     album:'Use Your Ilusion II',
     artista:"Guns N' Roses"},
-  { capa: 'albums/albumArt.png',
-    album:'Unplugged',
-    artista:'Alice In Chains'},
-  { capa: 'albums/albumArt2.png',
-    album:'Stadium Arcadium',
-    artista:'Red Hot Chilli Peppers'},
-  { capa: 'albums/albumArt3.png',
-    album:'Use Your Ilusion II',
-    artista:"Guns N' Roses"},
-  { capa: 'albums/albumArt.png',
-    album:'Unplugged',
-    artista:'Alice In Chains'},
-  { capa: 'albums/albumArt2.png',
-    album:'Stadium Arcadium',
-    artista:'Red Hot Chilli Peppers'},
-  { capa: 'albums/albumArt3.png',
-    album:'Use Your Ilusion II',
-    artista:"Guns N' Roses"},
+  { capa: 'albums/albumArt4.png',
+    album:'In Rainbows',
+    artista:'Radiohead'},
+  { capa: 'albums/albumArt5.png',
+    album:'Dolittle',
+    artista:'Pixies'},
+  { capa: 'albums/albumArt6.png',
+    album:'In Utero',
+    artista:"Nirvana"},
+  { capa: 'albums/albumArt7.png',
+    album:'Alive',
+    artista:'Pearl Jam'},
+  { capa: 'albums/albumArt8.png',
+    album:'Surfer Rosa',
+    artista:'Pixies'},
+  { capa: 'albums/albumArt9.png',
+    album:'Facelift',
+    artista:"Alice In Chains"},
 ];
 
 // One item component
@@ -92,13 +92,16 @@ export class Scroll extends Component {
     const menu = this.menuItems;
 
     return (
+        <div>
+          <div className="textoAlbum">{this.props.header}</div>
         <ScrollMenu
+        wheel={false}
+        alignCenter={false}
           data={menu}
-          arrowLeft={ArrowLeft}
-          arrowRight={ArrowRight}
           selected={selected}
           onSelect={this.onSelect}
         />
+        </div>
     );
   }
 }
