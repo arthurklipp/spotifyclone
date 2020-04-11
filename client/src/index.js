@@ -4,6 +4,7 @@ import './index.css';
 import { isAuthenticated } from './auth';
 import Login from './Pages/Login/index';
 import {Home} from './Pages/Home/index';
+import Register from './Pages/Register/index';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
@@ -20,6 +21,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
             <Route path="/" exact={true} component={Login} />
+            <PrivateRoute  path="/register" component={Register}/>
             <PrivateRoute  path="/home" component={Home}/>
         </Switch>
   </BrowserRouter>,
