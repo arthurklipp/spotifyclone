@@ -21,7 +21,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
             <Route path="/" exact={true} component={Login} />
-            <PrivateRoute  path="/register" component={Register}/>
+            <Route  path="/register" component={Register}/>
             <PrivateRoute  path="/home" component={Home}/>
         </Switch>
   </BrowserRouter>,
