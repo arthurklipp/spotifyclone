@@ -3,6 +3,7 @@ import './home.css';
 import Scroll from './Scroll/scroll';
 import LateralBar from './LateralBar/lateralBar';
 import Aside from './Aside/aside';
+import Navbar from './Navbar/navbar';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
@@ -25,6 +26,7 @@ export class Home extends React.Component{
   }
   render(){
     return <div className="layout">
+      <Navbar/>
       <LateralBar/>
       <div className="scroll">
         <Scroll header="Recently played"/>

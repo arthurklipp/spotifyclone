@@ -1,0 +1,34 @@
+#navbar{
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: center;
+}
+
+#barraPesquisa{
+    border: none;
+    border-radius: 50px;
+}
+
+#botaoUpgrade{
+    background-color: rgba(0, 0, 0, 0);
+    border-color: white;
+    width: 170px;
+    margin-left: auto;
+}
+
+#nome{
+    margin-bottom:1px;
+    margin-right: 20px;
+}
+
+#nome:hover{
+    text-decoration: underline;
+}
+
+#foto{
+    width: 30px;
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-left: 20px;
+}

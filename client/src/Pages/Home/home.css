@@ -41,8 +41,8 @@
   background-color: rgb(24, 24, 24);
   display: grid;
   grid-template-columns: 200px 100fr 260px;
-  grid-template-rows: 10vh 78vh 94px;
-  grid-template-areas: "m . a"
+  grid-template-rows: 40px 83vh 94px;
+  grid-template-areas: "m n a"
                        "m s a"
                        "m p p" ;
 }
@@ -86,4 +86,12 @@
   margin-left: 20px;
   grid-area: s;
   overflow: auto;
+}
+
+#navbar{
+  grid-area: n;
+}
+
+.textoBotao{
+  font-size: 11px;
 }
