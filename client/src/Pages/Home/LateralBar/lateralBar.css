@@ -57,3 +57,73 @@
     width: 200px;
 }
     
+.modalPlaylist{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modalItem{
+    width: 690px;
+    height: 350px;
+    background-color: rgb(40,40,40);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .5), 0 6px 20px 0 rgba(0, 0, 0, .5);
+}
+
+.cabecalho{
+    display: flex;
+    width: 100%;
+}
+
+.cabecalho h5{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.main{
+    display: flex;
+    width: 100%;
+    padding-left: 20px;
+}
+
+.inputs{
+    padding-left: 20px;
+    width: 435px;
+}
+.modalPlaylist img{
+    height: 210px;
+}
+
+.descricao textarea{
+    width: 100%;
+    height: 130px;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+}
+.modalPlaylist p{
+    margin-bottom: 1px;
+}
+
+.modalPlaylist input{
+    border: none;
+    width: 100%;
+}
+
+.rodape{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#botaoCriar{
+    width: 100px;
+    background-color: rgba(29, 185, 84, 1);
+    border: none;
+}

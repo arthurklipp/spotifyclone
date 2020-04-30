@@ -27,7 +27,7 @@ export class Home extends React.Component{
   render(){
     return <div className="layout">
       <Navbar/>
-      <LateralBar/>
+      
       <div className="scroll">
         <Scroll header="Recently played"/>
         <Scroll header="Feito para você"/>
@@ -35,28 +35,7 @@ export class Home extends React.Component{
         </div>
       <AudioPlayer layout="stacked-reverse" className="player" src="Daughter.flac"/>
       <Aside/>
-    </div>
-  }
-}
-
-class Albums extends React.Component{
-  render(){
-    return <div>
-      <div className='album'>
-        <img className='albumArt'src={this.props.capa[0]}/>
-        <div className='textoAlbum'>{this.props.album[0]}</div>
-        <div className='textoArtista'>{this.props.artista[0]}</div>
-      </div>
-      <div className='album'>
-        <img className='albumArt'src={this.props.capa[1]}/>
-        <div className='textoAlbum'>{this.props.album[1]}</div>
-        <div className='textoArtista'>{this.props.artista[1]}</div>
-      </div>
-      <div className='album'>
-        <img className='albumArt'src={this.props.capa[2]}/>
-        <div className='textoAlbum'>{this.props.album[2]}</div>
-        <div className='textoArtista'>{this.props.artista[2]}</div>
-      </div>
+      <LateralBar/>
     </div>
   }
 }
