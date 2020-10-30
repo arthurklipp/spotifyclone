@@ -1,6 +1,6 @@
 .lateralBar{
     width: 200px;
-    height: 65vh;
+    height: 72vh;
     padding-left: 20px;
     grid-area: m;
     background: rgb(18, 18, 18);
@@ -28,6 +28,7 @@
 
 .navScroll{
     margin-top: 30px;
+    margin-bottom: auto;
     height: 300px;
     overflow: auto;
 }

@@ -56,10 +56,10 @@ export class LateralBar extends Component {
                     <h1>...</h1>
                 </div>
                 <div className='nav'>
-                  <div className='navItem'>
+                  <a href="/home"className='navItem'>
                     <i class="fas fa-home fa-2x"></i>
                     <p className='texto font-weight-bold'>Inicio</p>
-                  </div>
+                  </a>
                   <div className='navItem'>
                     <i class="fas fa-compact-disc fa-2x"></i>
                     <p className='texto font-weight-bold'>Navegar</p>
@@ -86,9 +86,7 @@ export class LateralBar extends Component {
                   <i class="far fa-plus-square fa-2x mr-2 espaco"></i>
                   <p className='texto ml-0 espaco'>Nova playlist</p>
               </div>
-          <div className='footer'>
-            <img className='footer' src='albums/albumArt.png'/>
-          </div>
+              <img className='footer' src='albums/albumArt.png'/>
         </div>
     );
   }

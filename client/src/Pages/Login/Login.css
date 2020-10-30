@@ -128,20 +128,17 @@
 }
 
 #botaoLogin{
-  margin-left: 300px;
+  margin-left: auto;
   background-color: rgba(29, 185, 84, 1);
   border-color: rgba(29, 185, 84, 1);
-  width: 200px;
-  margin-bottom: 10px;
+  width: 100px;
+  height: 40px;
 }
 
 #meio{
-  align-items: center;
+  flex-wrap: nowrap;
   height: 80px;
-}
-
-.form-check-label{
-  margin-top: 15px;
+  padding-top: 70px;
 }
 
 .textoDestacado{
@@ -150,11 +147,6 @@
 
 .textoDestacado:hover{
   color: black;
-}
-
-.rodape{
-  justify-content: center;
-  height: 100px;
 }
 
 #textoRodape{
@@ -170,6 +162,6 @@
 
 .form-control{
   border-radius: 0;
-  padding: 3.5vh .75rem;
+  padding: 25px;
   
 }

@@ -71,10 +71,10 @@ export class Login extends Component{
               <div className='row'>
                 <input value={this.state.senha} onChange={(event)=>{this.setState({senha:event.target.value})}} placeholder='Senha' type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                 </div>
-                <div class="row" id='meio'>
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                  <label class="form-check-label" for="exampleCheck1">Lembrar de mim</label>
-                    <button onClick={this.login}type="button" id='botaoLogin' class="btn btn-primary btn-lg rounded-pill font-weight-bold">
+                <div className="row" id='meio'>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
+                    <label className="form-check-label" for="exampleCheck1">Lembrar de mim</label>
+                  <button onClick={this.login}type="button" id='botaoLogin' class="btn btn-primary btn-lg rounded-pill font-weight-bold">
                       <div className='textoBotao' >ENTRAR</div>
                     </button>
                 </div>
@@ -85,7 +85,8 @@ export class Login extends Component{
                 <div className='row divisor'>
                   <div className='linha'/>
                 </div>
-                <div className='rodape'>
+
+                <div>
                  
                     <h6 style={{textAlign: "center"}} id='textoRodape'>Não tem uma conta?</h6>
                  

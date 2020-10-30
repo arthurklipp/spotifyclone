@@ -1,0 +1,104 @@
+perfil{
+    width: 77vw;
+    padding-left: 20px;
+}
+
+navperfil{
+    display: flex;
+}
+
+headPerfil{
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+nomePerfil{
+    padding-left: 20px;
+    display: block;
+}
+.textoPerfil{
+    color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    
+}
+
+.textoPerfil:hover{
+    color: rgba(255, 255, 255, 1);
+}
+
+#fotoPerfil{
+    width: 120px;
+    border-radius: 100%;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.usuario{
+    color: rgba(255, 255, 255, 1);
+    margin-left: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+}
+
+.nome{
+    color: rgba(255, 255, 255, 1);
+    padding: 10px;
+    font-weight: 700;
+}
+more p{
+    width: 750px;
+    color: rgba(255, 255, 255, .7);
+    font-size:11px;
+}
+more{
+    color: rgba(255, 255, 255, 1);
+    font-size:40px;
+}
+
+playlists img{
+    width: 200px;
+}
+
+playlists head h5{
+    color: rgba(255, 255, 255, .9);
+    font-weight: 700;
+}
+playlists h6{
+    width: 130px;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, .9);
+    font-weight: 700;
+}
+playlists h6:hover{
+    color: rgba(255, 255, 255, 1);
+    border-bottom: solid 1px white;
+}
+playlists p{
+    color: rgba(255, 255, 255, .5);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    margin-top: auto;
+}
+
+playlists head{
+    height: 30px;
+    display: flex;
+    border-bottom: solid rgba(255, 255, 255, .1) 1px;
+    margin-right: 40px;
+}
+playlists head p:hover{
+    color: rgba(255, 255, 255, .8);
+    border-bottom: solid 1px white;
+}
+
+playlists album{
+    display: block;
+    margin-top: 20px;
+}

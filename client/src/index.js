@@ -4,6 +4,7 @@ import './index.css';
 import { isAuthenticated } from './auth';
 import Login from './Pages/Login/index';
 import {Home} from './Pages/Home/index';
+import {Perfil} from './Pages/Perfil/index';
 import Register from './Pages/Register/index';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
@@ -23,6 +24,7 @@ ReactDOM.render(
             <Route path="/" exact={true} component={Login} />
             <Route  path="/register" component={Register}/>
             <PrivateRoute  path="/home" component={Home}/>
+            <PrivateRoute  path="/perfil" component={Perfil}/>
         </Switch>
   </BrowserRouter>,
   document.getElementById('root')

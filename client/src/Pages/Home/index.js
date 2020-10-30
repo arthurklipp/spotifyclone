@@ -26,16 +26,16 @@ export class Home extends React.Component{
   }
   render(){
     return <div className="layout">
-      <Navbar/>
-      
-      <div className="scroll">
-        <Scroll header="Recently played"/>
-        <Scroll header="Feito para você"/>
-        <Scroll header="Com base no que você ouviu recentemente"/>
-        </div>
-      <AudioPlayer layout="stacked-reverse" className="player" src="Daughter.flac"/>
-      <Aside/>
-      <LateralBar/>
+        <LateralBar/>
+        <main>
+        <Navbar/>
+        <div className="scroll">
+          <Scroll header="Recently played"/>
+          <Scroll header="Feito para você"/>
+          <Scroll header="Com base no que você ouviu recentemente"/>
+          </div>
+          </main>
+        <Aside/>
     </div>
   }
 }
