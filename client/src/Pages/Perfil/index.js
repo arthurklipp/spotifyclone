@@ -4,16 +4,23 @@ import LateralBar from '../Home/LateralBar/lateralBar';
 import Navbar from '../Home/Navbar/navbar';
 import "./perfil.css";
 export class Perfil extends React.Component{
+    constructor(props){
+        super(props);
+            this.state={
+                src:"HIHI.png",
+                user:"Arthur Klipp Zenzeluk"
+            };
+    }
     render(){
         return <div className='layout'>
             <LateralBar/>
             <perfil>
-                <Navbar/>
+                <Navbar src={this.state.src} user={this.state.user}/>
                     <headPerfil>
-                        <img id='fotoPerfil' src='HIHI.png'/>
+                        <img id='fotoPerfil' src={this.state.src}/>
                         <nomePerfil>
                             <p className="usuario">USUÁRIO</p>
-                            <h1 className="nome">Arthur Klipp Zenzeluk</h1>
+                            <h1 className="nome">{this.state.user}</h1>
                             <more>...{/*}<p>Ao continuar, você autoriza o Spotify a acessar a imagem de que você fizer upload. certifique-se de que você tem direito de fazer upload da imagem. Só vamos usar sua imagem como sua foto de perfil e/ou arte da capa de uma playlist.</p>{*/}</more>
                         </nomePerfil>
                     </headPerfil>

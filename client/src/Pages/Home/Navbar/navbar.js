@@ -11,8 +11,8 @@ export default class Navbar extends React.Component{
                     <div className='textoBotao'>FAZER UPGRADE</div>
             </button>
             <a className="d-flex"href="/perfil">
-                <img id='foto' src='HIHI.png'/>
-                <p id='nome' className="branco">Arthur Klipp Zenzeluk</p>
+                <img id='foto' src={this.props.src}/>
+                <p id='nome' className="branco">{this.props.user}</p>
                 </a>
                 <i id="seta" class="fas fa-chevron-down"></i>
         </div>
