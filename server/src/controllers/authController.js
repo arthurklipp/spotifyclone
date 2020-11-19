@@ -1,45 +1,49 @@
 const express = require('express');
+const User = require('../models/User');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const secret = 'shhh!';
-const User = require('../models/user');
 
-const authController = express.Router();
+const authConfig = require('../config/auth');
 
-//login com basic authorization
-authController.get('/login', async (req, res)=>{
-    if(!req.headers.authorization){
-        res.send("Nenhuma credencial enviada!");
-    }else{
-        console.log(req.headers.authorization);
-        //pega o token do basic authorization que veio no header da requisição
-        const [hashType, hash] = req.headers.authorization.split(' ');
-        console.log(hash);
-        //converte o token do header para termos acesso aos dados do usuário(credential[0] = email e credential[1] = password)
-        const credentials = Buffer.from(hash, 'base64').toString().split(':');
-        
-        const user = await User.findOne({ email : credentials[0], password: credentials[1] });
-      
-        if(user){
+function generateToken(params = {}){
+    return jwt.sign(params, authConfig.secret, {
+        expiresIn: 86400,
+    });
+}
 
-            const userid = user._id;
-            const token = jwt.sign({userid}, secret);
-            res.send({auth: true, token: token});
-        }else{
-            res.send({auth: false, message:'Login inválido!'})
-        }
- 
-    }
-  
-})
+router.post('/register', async (req, res) =>{
+    const{ email } = req.body;
 
-authController.post('/register', async (req, res)=>{
     try{
+        if(await User.findOne({ email }))
+            return res.status(400).send({ error: 'user already exists' });
         const user = await User.create(req.body);
-        res.send({message:"Cadastro efetuado com sucesso!"});
+        user.password = undefined;
+        return res.send({user,
+        token: generateToken({id: user.id}),
+    });
     }catch(err){
-        res.send({message: "Erro", error: err.message})
+        return res.status(400).send({error: 'Registration failed'});
     }
-    
-})
+});
 
-module.exports = authController;
+router.post('/login', async (req, res) =>{
+    const {email, password} = req.body;
+    const user = await User.findOne({email}).select('+password');
+
+    if(!user)
+        return res.status(400).send({error: 'User not found'});
+    
+    if(!await bcrypt.compare(password, user.password))
+        return res.status(400).send({error: 'Invalid password'});
+    
+    user.password = undefined;
+
+    res.send({
+        user, 
+        token: generateToken({id: user.id})
+    });
+});
+
+module.exports = app => app.use('/auth', router);

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/spotify', { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost/noderest', {useMongoClient: true});
+
 mongoose.Promise = global.Promise;
 
 module.exports = mongoose;
