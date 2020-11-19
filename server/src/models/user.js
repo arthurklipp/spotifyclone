@@ -1,6 +1,10 @@
 const mongoose = require('../database/index');
 
 const UserSchema = new mongoose.Schema({
+    img:{
+        type: String,
+        required: false
+    },
     name:{
         type: String,
         required: true
