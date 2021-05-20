@@ -1,7 +1,33 @@
-.layout{
-  overflow: hidden;
-  background-color: rgb(24, 24, 24);
+.parteCima{
   display: flex;
+  height: 90%;
+}
+
+@media(max-height: 870px){
+  .parteCima{
+    height: 89%;
+  }
+}
+@media(max-height: 850px){
+  .parteCima{
+    height: 88%;
+  }
+}
+@media(max-height: 800px){
+  .parteCima{
+    height: 87%;
+  }
+}
+@media(max-height: 750px){
+  .parteCima{
+    height: 85%;
+  }
+}
+
+.layout{
+  background-color: rgb(24, 24, 24);
+  display: block;
+  height: 100vh;
 }
 
 .albumArt{
@@ -37,6 +63,7 @@
 .scroll{
   margin-left: 20px;
   overflow: auto;
+  height: 92%;
 }
 
 #navbar{
@@ -48,6 +75,5 @@
 }
 
 main{
-  height: 100vh;
-  overflow: auto;
+  overflow: hidden;
 }

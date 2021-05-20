@@ -1,6 +1,6 @@
 export function isAuthenticated(){
-    var login=JSON.parse(localStorage.getItem('login'));
-    if(login.auth==true){
+    var login=localStorage.getItem('login');
+    if(login!=null){
         return true;
     }else{
         return false;

@@ -1,6 +1,11 @@
+.telaLateralbar{
+    width: 200px;
+    position: relative;
+    background: rgb(18, 18, 18);
+   }
+
 .lateralBar{
     width: 200px;
-    height: 72vh;
     padding-left: 20px;
     grid-area: m;
     background: rgb(18, 18, 18);
@@ -55,13 +60,16 @@
     margin-left: 20px;
 }
 .footer{
-    width: 200px;
+    width: 100%;
+    position: absolute;
+	bottom: 0;
 }
     
 .modalPlaylist{
     width: 100vw;
     height: 100vh;
-    position: fixed;
+    z-index: 1;
+    position: absolute;
     background-color: rgba(0, 0, 0, .5);
     display: flex;
     justify-content: center;

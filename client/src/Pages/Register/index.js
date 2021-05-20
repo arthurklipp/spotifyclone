@@ -12,14 +12,25 @@ export default class Register extends Component {
         this.enviarDados = this.enviarDados.bind(this);
       }
 
-    enviarDados(){
-        fetch('http://localhost:8080/register', {
+    async enviarDados(){
+        const request = await fetch('http://localhost:8080/auth/register', {
             method: 'POST',
             headers :{'Content-type': 'application/json'},
             body:JSON.stringify({password:this.state.senha, email:this.state.email, name:this.state.nome})
-        }).then((res) => res.json())
-        .then((data) =>  console.log(data))
-        .catch((err)=>console.log(err))
+        })
+    const resposta = await request.json();
+    if(resposta.token!== null){
+      localStorage.setItem('login', resposta.token);
+      localStorage.setItem('user', resposta.user.name);
+      localStorage.setItem('email', resposta.user.email);
+      localStorage.setItem('id', resposta.user._id);
+      window.location.href="/home";
+    }else{
+      localStorage.removeItem('login');
+      localStorage.removeItem('user');
+      localStorage.removeItem('email');
+      localStorage.removeItem('id');
+    }
     }
     render(){
         return (
@@ -44,33 +55,30 @@ export default class Register extends Component {
                     <p className='font-weight-bold text-center'>Inscrever-se com seu endereço de e-mail.</p>
                     <form>
                         <div className='row'>
-                            <input placeholder='E-mail' type="email" class="form-control input" value={this.state.email} onChange={(event)=>{this.setState({email:event.target.value})}} aria-describedby="emailHelp" />
+                            <input placeholder='Nome' type="text" class="form-control input" value={this.state.nome} onChange={(event)=>{this.setState({nome:event.target.value})}}/>
                         </div>
                         <div className='row'>
-                            <input placeholder='Confirmar e-mail' type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" />
+                            <input placeholder='E-mail' type="email" class="form-control" value={this.state.email} onChange={(event)=>{this.setState({email:event.target.value})}}/>
                         </div>
                         <div className='row'>
                             <input placeholder='Senha' type="password" class="form-control" value={this.state.senha} onChange={(event)=>{this.setState({senha:event.target.value})}} aria-describedby="emailHelp" />
                         </div>
-                        <div className='row'>
-                            <input placeholder='Como devemos chamar você?' type="text" class="form-control" value={this.state.nome} onChange={(event)=>{this.setState({nome:event.target.value})}} aria-describedby="emailHelp" />
-                        </div>
                         <div class="row" id='meio'>
                             {/* <input type="checkbox" class="form-check-input" id="exampleCheck1" />
                             <label class="form-check-label" for="exampleCheck1">Lembrar de mim</label> */}
-                            <button onClick={this.enviarDados}type="button" class="button btn btn-primary btn-lg rounded-pill font-weight-bold" style={{padding: "2vh 15vh", margin:"0 auto"}}>
-                                <div className='textoBotao' >INSCREVER-SE</div>
+                            <button onClick={this.enviarDados} type="button" class="button btn btn-lg rounded-pill font-weight-bold mr-auto ml-auto" style={{width:"60%", height:"45px"}}>
+                                <div className='textoBotao' style={{color:"white"}}>INSCREVER-SE</div>
                             </button>
                         </div>
                     </form>
-                    <div className='row divisor'>
+                    {/*<div className='row divisor'>
                         <p>Já tem uma conta?
                             <Link to="/">
                             <span className='textoDestacado' style={{cursor: "pointer"}}> Entrar</span>
                             </Link>
                         
                         </p> 
-                    </div>
+                        </div>*/}
         
                 </div>
             </div>

@@ -15,28 +15,35 @@ export class Login extends Component{
   constructor(props){
     super(props);
     this.state={
-      email:'',
-      senha:'',
-      response:''
+      email:'arthurklipp10@gmail.com',
+      senha:'123'
     };
     this.login = this.login.bind(this);
   }
   async login(){
-    let request = await fetch('http://localhost:8080/login', { 
-      headers: new Headers({
-          'Authorization': "Basic " + window.btoa(this.state.email+':'+this.state.senha), 
-          'Content-Type': 'application/x-www-form-urlencoded'
-      }), 
-      });
-
-      var resposta = await request.json();
-      if(resposta.auth){
-        localStorage.setItem('login',JSON.stringify(resposta));
-        window.location.href = "/home";
-      }else{
-        localStorage.setItem('login',JSON.stringify(resposta));
-        alert(resposta.message);
-      };
+    let request = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        'email':this.state.email,
+        'password':this.state.senha
+      })
+    })
+    const resposta = await request.json();
+    if(resposta.token!== null){
+      localStorage.setItem('login', resposta.token);
+      localStorage.setItem('user', resposta.user.name);
+      localStorage.setItem('email', resposta.user.email);
+      localStorage.setItem('id', resposta.user._id);
+      window.location.href="/home";
+    }else{
+      localStorage.removeItem('login');
+      localStorage.removeItem('user');
+      localStorage.removeItem('email');
+      localStorage.removeItem('id');
+    }
 }
     render(){
     return (

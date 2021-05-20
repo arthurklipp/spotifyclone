@@ -27,7 +27,7 @@ export class LateralBar extends Component {
   
   render() {
     return (
-      <div>
+      <div className="telaLateralbar">
         <div onClick={this.esconderModal} className={this.state.modal?("modalPlaylist"):("modalPlaylist invisible")}>
             <div className="modalItem">
               <div className="cabecalho">
@@ -45,7 +45,7 @@ export class LateralBar extends Component {
                     </div>
                 </div>
                 <div className="rodape">
-                  <button type="button" id='botaoCriar' class="btn btn-primary btn-lg rounded-pill font-weight-bold">
+                  <button type="button" id='botaoCriar' className="btn btn-primary btn-lg rounded-pill font-weight-bold">
                         <div className='textoBotao' >CRIAR</div>
                       </button>
                   </div>
@@ -57,15 +57,15 @@ export class LateralBar extends Component {
                 </div>
                 <div className='nav'>
                   <a href="/home"className='navItem'>
-                    <i class="fas fa-home fa-2x"></i>
+                    <i className="fas fa-home fa-2x"></i>
                     <p className='texto font-weight-bold'>Inicio</p>
                   </a>
                   <div className='navItem'>
-                    <i class="fas fa-compact-disc fa-2x"></i>
+                    <i className="fas fa-compact-disc fa-2x"></i>
                     <p className='texto font-weight-bold'>Navegar</p>
                   </div>
                   <div className='navItem'>
-                  <i class="fas fa-broadcast-tower fa-2x"></i>
+                  <i className="fas fa-broadcast-tower fa-2x"></i>
                     <p className='texto font-weight-bold'>Rádio</p>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export class LateralBar extends Component {
                 </div>
             </div>
           <div onClick={this.mostrarModal} className='novaPlaylist'>
-                  <i class="far fa-plus-square fa-2x mr-2 espaco"></i>
+                  <i className="far fa-plus-square fa-2x mr-2 espaco"></i>
                   <p className='texto ml-0 espaco'>Nova playlist</p>
               </div>
               <img className='footer' src='albums/albumArt.png'/>
