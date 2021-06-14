@@ -10,7 +10,7 @@ export default class Navbar extends React.Component{
             <button type="button" id='botaoUpgrade' className="btn btn-primary btn-block rounded-pill font-weight-bold">
                     <div className='textoBotao'>FAZER UPGRADE</div>
             </button>
-            <a className="d-flex"href="/perfil">
+            <a className="d-flex" href="/perfil">
                 <img id='foto' src={this.props.src}/>
                 <p id='nome' className="branco">{this.props.user}</p>
                 </a>

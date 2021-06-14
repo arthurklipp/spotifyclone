@@ -4,7 +4,8 @@ import Scroll from './Scroll/scroll';
 import LateralBar from './LateralBar/lateralBar';
 import Aside from './Aside/aside';
 import Navbar from './Navbar/navbar';
-import Player from './Player/player';
+//import Player from './Player/player';
+import Player from './Player/teste';
 
 function head(){
   
@@ -44,7 +45,7 @@ export class Home extends React.Component{
                     </main>
                   <Aside/>
                 </div>
-              <Player/>
+                <Player/>
             </div>
   }
 }

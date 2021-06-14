@@ -8,8 +8,8 @@ const list = [
   { capa: 'albums/albumArt.png',
     album:'Unplugged',
     artista:'Alice In Chains'},
-  { capa: 'albums/albumArt2.png',
-    album:'Stadium Arcadium',
+  { capa: 'albums/The_Getaway.jpg',
+    album:'The Gataway',
     artista:'Red Hot Chilli Peppers'},
   { capa: 'albums/albumArt3.png',
     album:'Use Your Ilusion II',
@@ -39,7 +39,9 @@ const list = [
 const MenuItem = ({capa,album, artista, selected}) => {
   return <div className='album'>
   <img className='albumArt'src={capa}/>
-  <div className='textoAlbum'>{album}</div>
+  <a href="/playlist">
+    <div className='textoAlbum'>{album}</div>
+  </a>
   <div className='texto'>{artista}</div>
 </div>
 };

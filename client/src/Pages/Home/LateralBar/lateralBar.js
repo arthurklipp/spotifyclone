@@ -86,7 +86,6 @@ export class LateralBar extends Component {
                   <i className="far fa-plus-square fa-2x mr-2 espaco"></i>
                   <p className='texto ml-0 espaco'>Nova playlist</p>
               </div>
-              <img className='footer' src='albums/albumArt.png'/>
         </div>
     );
   }

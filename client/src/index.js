@@ -5,6 +5,7 @@ import { isAuthenticated } from './auth';
 import Login from './Pages/Login/index';
 import {Home} from './Pages/Home/index';
 import {Perfil} from './Pages/Perfil/index';
+import {PlaylistPrincipal} from './Pages/PlaylistPrincipal/index';
 import Register from './Pages/Register/index';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
@@ -18,6 +19,7 @@ const PrivateRoute = ({component: Component, ... rest}) => (
     )
   )}/>
 )
+
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -25,6 +27,7 @@ ReactDOM.render(
             <Route  path="/register" component={Register}/>
             <PrivateRoute  path="/home" component={Home}/>
             <PrivateRoute  path="/perfil" component={Perfil}/>
+            <PrivateRoute  path="/playlist" component={PlaylistPrincipal}/>
         </Switch>
   </BrowserRouter>,
   document.getElementById('root')

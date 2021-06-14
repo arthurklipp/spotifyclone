@@ -38,6 +38,17 @@
     overflow: auto;
 }
 
+@media(max-height: 900px){
+    .navScroll{
+        height: 250px;
+    }
+}
+@media(max-height: 800px){
+    .navScroll{
+        height: 200px;
+    }
+}
+
 .title{
     color:rgba(255, 255, 255, .6);
     font-size: 13px;
@@ -59,12 +70,7 @@
     margin-bottom:auto;
     margin-left: 20px;
 }
-.footer{
-    width: 100%;
-    position: absolute;
-	bottom: 0;
-}
-    
+
 .modalPlaylist{
     width: 100vw;
     height: 100vh;
