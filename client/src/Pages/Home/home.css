@@ -39,6 +39,10 @@
   margin-right: auto;
 }
 
+.perfil{
+  border-radius: 100%;
+}
+
 .album{
   margin-left: 10px;
   margin-right: 10px;
@@ -49,6 +53,10 @@
 .textoAlbum{
   font-weight: 700;
   color:rgba(255, 255, 255, .9);
+}
+.textoAlbumPerfil{
+  margin-top: 15px;
+  text-align: center;
 }
 
 .textoAlbum:hover{

@@ -4,8 +4,7 @@ import Scroll from './Scroll/scroll';
 import LateralBar from './LateralBar/lateralBar';
 import Aside from './Aside/aside';
 import Navbar from './Navbar/navbar';
-//import Player from './Player/player';
-import Player from './Player/teste';
+import Player from './Player/player';
 
 function head(){
   
@@ -15,15 +14,19 @@ function head(){
     );
 }
 
+const list ={ capa: 'albums/albumArt.png',
+              album:'Unplugged',
+              musica:'would.mp3',
+              titulo:'Would',
+              n:0,
+              artista:'Alice In Chains'};
+
 export class Home extends React.Component{
   constructor(props){
     super(props);
     this.state={
       src:"/pngegg.PNG",
-      user: localStorage.getItem('user'),
-      capa:['albums/albumArt.png','albums/albumArt2.png','albums/albumArt3.png','albums/albumArt4.png','albums/albumArt5.png','albums/albumArt6.png'],
-      album:['Unplugged','Stadium Arcadium', 'Use Your Ilusion II','Album 1','Album 2', 'Album 3'],
-      artista:['Alice In Chains','Red Hot Chili Peppers','Guns N'+' roses','John','Peter','Alice']
+      user: localStorage.getItem('user')
     };
   }
   render(){
@@ -45,7 +48,7 @@ export class Home extends React.Component{
                     </main>
                   <Aside/>
                 </div>
-                <Player/>
+                <Player capa={list.capa} titulo={list.titulo} artista={list.artista} musica={list.musica} avancar={this.avancar} voltar={this.voltar}/>
             </div>
   }
 }

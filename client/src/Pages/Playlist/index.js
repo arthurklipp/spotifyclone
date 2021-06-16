@@ -5,8 +5,8 @@ export class Playlist extends React.Component{
     render(){
         return <div className="musica">
             <Scroll header="Playlists"/>
-            <Scroll header="Seguidores"/>
-            <Scroll header="Seguindo"/>
+            <Scroll header="Seguidores" tipo={1}/>
+            <Scroll header="Seguindo" tipo={1}/>
         </div>
     }
 }

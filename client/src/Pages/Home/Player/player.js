@@ -7,22 +7,42 @@ export class Player extends Component {
 
   constructor(props){
     super(props);
+
     this.esconderAlbum = this.esconderAlbum.bind(this);
+    this.mostrarAlbum = this.mostrarAlbum.bind(this);
   }
 
   esconderAlbum() {
     var elem = document.getElementById('musica');
     var elem2 = document.getElementById('footer');
     var pos = 0;
-    var pos2 = -204;
+    var pos2 = -110;
     setInterval(frame, 1);
     function frame() {
       if (pos >= -72) {
         pos=pos-3; 
         elem.style.left = pos + "px"; 
       }
-      if(pos2<0){
+      if(pos2<90){
           pos2=pos2+4; 
+          elem2.style.bottom = pos2 + "px"; 
+      }
+    }
+  }
+
+  mostrarAlbum() {
+    var elem = document.getElementById('musica');
+    var elem2 = document.getElementById('footer');
+    var pos = -75;
+    var pos2 = 90;
+    setInterval(frame, 1);
+    function frame() {
+      if (pos < 0) {
+        pos=pos+3; 
+        elem.style.left = pos + "px"; 
+      }
+      if(pos2>=-110){
+          pos2=pos2-4; 
           elem2.style.bottom = pos2 + "px"; 
       }
     }
@@ -31,14 +51,20 @@ export class Player extends Component {
   render() {
     return (
           <div className="player">
+              <div id='footer'>
+                <preto>
+                  <div className="iconeAlbum" onClick={this.mostrarAlbum}/>
+                </preto>
+                <img className="imgAlbum" src={this.props.capa}/>
+              </div>
             <musica  id="musica">
-              <img  id="imgPlayer" src='albums/albumArt.png'onClick={this.esconderAlbum}/>
+              <img  id="imgPlayer" src={this.props.capa} onClick={this.esconderAlbum}/>
               <div id="infos">
-                <div id="textoAlbumPlayer">No Excuses - Live at the Majestic Theatre, Brooklyn, NY - April 1996</div>
-                <div id="artistaPlayer">Alice In Chains</div>
+                <div id="textoAlbumPlayer">{this.props.titulo}</div>
+                <div id="artistaPlayer">{this.props.artista}</div>
                 </div>
             </musica>
-            <ReactAudioPlayer className="mainPlayer" src='would.mp3' layout='stacked-reverse' showSkipControls={true} showJumpControls={false} customVolumeControls={[]}/>
+            <ReactAudioPlayer className="mainPlayer" src={this.props.musica} layout='stacked-reverse' showSkipControls={true} showJumpControls={false} /*customVolumeControls={[]}*/ onClickPrevious={this.props.voltar} onClickNext={this.props.avancar}/>
             <controles>
               <div className="volume">
                 <i className="fas fa-volume-up"></i>
