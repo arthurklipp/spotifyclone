@@ -3,7 +3,7 @@ import Aside from '../Home/Aside/aside';
 import LateralBar from '../Home/LateralBar/lateralBar';
 import Navbar from '../Home/Navbar/navbar';
 import { Playlist } from '../Playlist';
-import Player from '../Home/Player/teste';
+import Player from '../Home/Player/player';
 import {CabecalhoPerfilPlaylist} from './cabecalhoPerfilPlaylist';
 import "./perfil.css";
 

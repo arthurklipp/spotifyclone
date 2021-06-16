@@ -8,9 +8,20 @@
     padding-right: 25px;
 }
 
+.filaItem:hover{
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
 .filaItem h6{
     margin-right: 20px;
     margin-bottom: 0px;
+    color: rgb(210, 210, 210);
 }
 
 .filaItem img{
@@ -25,6 +36,11 @@
 .textoFila h6{
     line-height: 20px;
     margin-left: 20px;
+}
+
+#titulo{
+    color: rgb(255, 255, 255);
+    font-weight: 600;
 }
 
 .tempoItem{
