@@ -25,7 +25,7 @@ export class Home extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      src:"/pngegg.PNG",
+      src:localStorage.getItem('perfil'),
       user: localStorage.getItem('user')
     };
   }

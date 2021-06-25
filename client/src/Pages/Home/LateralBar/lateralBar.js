@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './lateralBar.css';
+import api from "../../../api";
 
 
 export class LateralBar extends Component {
@@ -24,7 +25,7 @@ export class LateralBar extends Component {
           this.setState({modal:false})
       }
   }
-  
+
   render() {
     return (
       <div className="telaLateralbar">
@@ -86,9 +87,45 @@ export class LateralBar extends Component {
                   <i className="far fa-plus-square fa-2x mr-2 espaco"></i>
                   <p className='texto ml-0 espaco'>Nova playlist</p>
               </div>
+              <UploadForm/>
         </div>
     );
   }
 }
 
 export default LateralBar
+
+class UploadForm extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={ src: "HIH.png"};
+
+    this.fileInput = React.createRef();
+    this.processUpload=this.processUpload.bind(this);
+  }
+
+  processUpload(event){
+    event.preventDefault();
+    const data = new FormData();
+
+    data.append("file", this.fileInput.current.files[0]);
+
+    api.post("projects/post", data)
+      .then(response => {
+        //this.setState({src: response.data.perfil});
+        localStorage.setItem('perfil', response.data.perfil);
+      })
+      .catch(() => {
+        console.log("merda");
+      });
+  };
+
+  render(){
+    return(
+      <form onSubmit={this.processUpload}>
+        <input type='file' name='file' ref={this.fileInput}/>
+        <input type='submit'/>
+      </form>
+    );
+  }
+}

@@ -32,15 +32,17 @@ export class Login extends Component{
       })
     })
     const resposta = await request.json();
-    if(resposta.token!== null){
+    if(resposta.token!= null){
       localStorage.setItem('login', resposta.token);
       localStorage.setItem('user', resposta.user.name);
+      localStorage.setItem('perfil', resposta.user.perfil);
       localStorage.setItem('email', resposta.user.email);
       localStorage.setItem('id', resposta.user._id);
       window.location.href="/home";
     }else{
       localStorage.removeItem('login');
       localStorage.removeItem('user');
+      localStorage.removeItem('perfil');
       localStorage.removeItem('email');
       localStorage.removeItem('id');
     }
