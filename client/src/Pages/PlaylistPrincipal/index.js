@@ -73,7 +73,9 @@ export class PlaylistPrincipal extends React.Component{
         this.voltar = this.voltar.bind(this);
         this.trocarMusica = this.trocarMusica.bind(this);
         this.state={
-            index: 0
+            index: 0,
+            src: localStorage.getItem('perfil'),
+            user: localStorage.getItem('user')
         };
     }
 
@@ -117,7 +119,7 @@ export class PlaylistPrincipal extends React.Component{
                 <div className="parteCima">
                     <LateralBar/>
                     <main>
-                        <Navbar src="/pngegg.png" user="Arthur Klipp Zenzeluk"/>
+                        <Navbar src={this.state.src} user={this.state.user}/>
                         <div id="content">
                             <CabecalhoPerfilPlaylist img="albums/albumArt.png" titulo="Album" nome="Unplugged" subtitulo="Alice In Chains - 1996 - 13 musicas, 1h 11min"/>
                             <div id="fila">
