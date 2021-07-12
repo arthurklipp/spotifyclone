@@ -22,7 +22,7 @@ export default class Register extends Component {
     if(resposta.token!= null){
         localStorage.setItem('login', resposta.token);
         localStorage.setItem('user', resposta.user.name);
-        localStorage.setItem('perfil', resposta.user.perfil);
+        localStorage.setItem('perfil', 'http://localhost:8080/uploads/'+resposta.user.perfil);
         localStorage.setItem('email', resposta.user.email);
         localStorage.setItem('id', resposta.user._id);
         window.location.href="/home";

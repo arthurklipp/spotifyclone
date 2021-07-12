@@ -27,8 +27,8 @@ export class Perfil extends React.Component{
     
         api.post("projects/post", data)
           .then(response => {
-            this.setState({src: response.data.perfil});
-            localStorage.setItem('perfil', response.data.perfil);
+            this.setState({src: 'http://localhost:8080/uploads/'+response.data.perfil});
+            localStorage.setItem('perfil', 'http://localhost:8080/uploads/'+response.data.perfil);
           })
           .catch(() => {
             console.log("merda");

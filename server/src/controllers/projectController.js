@@ -20,22 +20,21 @@ router.get('/',(req,res) =>{
 });
 
 router.post('/post', multer(multerConfig).single('file'), async (req,res) =>{
-        const id = req.userId;
-        const perfil = await User.findById(id);
+        const perfil = await User.findById(req.userId);
 
-        if(perfil.perfil!="http://localhost:8080/uploads/pngegg.png"){
+        if(perfil.perfil!="pngegg.png"){
             promisify(fs.unlink)(
                 path.resolve(__dirname, '..', '..', 'public', 'imgs', 'perfil', perfil.perfil)
               );
         }
         
-        User.findByIdAndUpdate(id, {$set:{perfil:"http://localhost:8080/uploads/"+req.file.filename}},function(err, doc){
+        User.findByIdAndUpdate(req.userId, {$set:{perfil: req.file.filename}},function(err, doc){
             if(err){
                 console.log("Something wrong when updating data!");
             }
         });
         
-    res.send({ok: true, perfil: "http://localhost:8080/uploads/"+req.file.filename})
+    res.send({ok: true, perfil: req.file.filename})
 });
 
 router.post('/playlist', async(req, res) => {
