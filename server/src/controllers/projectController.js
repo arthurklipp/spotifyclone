@@ -22,10 +22,14 @@ router.get('/',(req,res) =>{
 router.post('/post', multer(multerConfig).single('file'), async (req,res) =>{
         const id = req.userId;
         const perfil = await User.findById(id);
-        promisify(fs.unlink)(
-            path.resolve(__dirname, '..', '..', 'public', 'imgs', 'perfil', perfil.perfil)
-          );
-        User.findOneAndUpdate(id, {$set:{perfil:req.file.filename}},function(err, doc){
+
+        if(perfil.perfil!="http://localhost:8080/uploads/pngegg.png"){
+            promisify(fs.unlink)(
+                path.resolve(__dirname, '..', '..', 'public', 'imgs', 'perfil', perfil.perfil)
+              );
+        }
+        
+        User.findByIdAndUpdate(id, {$set:{perfil:"http://localhost:8080/uploads/"+req.file.filename}},function(err, doc){
             if(err){
                 console.log("Something wrong when updating data!");
             }
