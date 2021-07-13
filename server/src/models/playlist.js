@@ -8,6 +8,9 @@ const PlaylistSchema = new mongoose.Schema({
     description:{
         type: String,
     },
+    img:{
+        type: String,
+    },
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -21,6 +24,11 @@ const PlaylistSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+});
+
+PlaylistSchema.pre('save', async function(next){
+    this.img = 'album.png';
+    next();
 });
 
 const Playlist = mongoose.model('Playlist', PlaylistSchema);

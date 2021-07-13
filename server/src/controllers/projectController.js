@@ -2,6 +2,7 @@ const express = require('express');
 const authMiddleware = require('../middlewares/auth');
 const multer = require('multer');
 const multerConfig = require('../config/multer');
+const multerConfig2 = require('../config/multer2');
 const router = express.Router();
 
 const User = require('../models/User');
@@ -35,6 +36,29 @@ router.post('/post', multer(multerConfig).single('file'), async (req,res) =>{
         });
         
     res.send({ok: true, perfil: req.file.filename})
+});
+
+router.post('/playlistImg/:playlistId', multer(multerConfig2).single('file'), async (req,res) =>{
+
+        const playlist = await Playlist.findById(req.params.playlistId);
+
+        if(req.userId != playlist.user){
+            return res.status(400).send({error: 'error upload image playlist(No authorized)'});
+        }
+
+        if(playlist.img!="album.png"){
+            promisify(fs.unlink)(
+                path.resolve(__dirname, '..', '..', 'public', 'imgs', 'playlist', playlist.img)
+              );
+        }
+        
+        Playlist.findByIdAndUpdate(playlist._id, {$set:{img: req.file.filename}},function(err, doc){
+            if(err){
+                console.log("Something wrong when updating data!");
+            }
+        });
+        
+    res.send({ok: true, img: req.file.filename})
 });
 
 router.post('/playlist', async(req, res) => {
@@ -92,6 +116,13 @@ router.get('/playlists/:playlistId', async(req, res) => {
 });
 
 router.put('/playlists/:playlistId', async(req, res) => {
+
+    const playlist = await Playlist.find({_id: {$in: req.params.playlistId}});
+
+    if(req.userId != playlist[0].user){
+        return res.status(400).send({error: 'error update playlist(No authorized)'});
+    }
+
     try{
         const { title, description, musics } = req.body;
 
@@ -121,8 +152,16 @@ router.put('/playlists/:playlistId', async(req, res) => {
 });
 
 router.delete('/:playlistId', async(req, res) => {
+
+    const playlist = await Playlist.find({_id: {$in: req.params.playlistId}});
+
+    if(req.userId != playlist[0].user){
+        return res.status(400).send({error: 'error delete playlist(No authorized)'});
+    }
+
     try{
         await Playlist.findByIdAndRemove(req.params.playlistId);
+        await Music.remove({ playlist: req.params.playlistId });
 
         return res.send();
     }catch(err){
