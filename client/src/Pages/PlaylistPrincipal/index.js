@@ -6,64 +6,9 @@ import Navbar from '../Home/Navbar/navbar';
 import { Playlist } from '../Playlist';
 import Player from '../Home/Player/player';
 import "./style.css";
+import api from '../../api';
 
-const list = [
-    { capa: 'albums/albumArt.png',
-      album:'Unplugged',
-      musica:'would.mp3',
-      titulo:'Would',
-      n:0,
-      artista:'Alice In Chains'},
-    { capa: 'albums/The_Getaway.jpg',
-      album:'Stadium Arcadium',
-      musica:'/music/4 - The Longest Wave.flac',
-      titulo:'The Longest Wave',
-      n:1,
-      artista:'Red Hot Chili Peppers'},
-    { capa: 'albums/albumArt3.png',
-      album:'Use Your Ilusion II',
-      musica:'/music/10 - November Rain.flac',
-      titulo:'November Rain',
-      n:2,
-      artista:'Guns N'+' roses'},
-    { capa: 'albums/albumArt4.png',
-      album:'In Rainbows',
-      musica:'/music/9 - Jigsaw Falling Into Place.flac',
-      titulo:'Jigsaw Falling Into Place',
-      n:3,
-      artista:'Radiohead'},
-    { capa: 'albums/albumArt5.png',
-      album:'Album 2',
-      musica:'/music/Hey - Pixies.flac',
-      titulo:'Hey',
-      n:4,
-      artista:'Pixies'},
-    { capa: 'albums/albumArt6.png',
-      album:'Album 3',
-      musica:'/music/Heart-Shaped Box - Nirvana.flac',
-      titulo:'Heart-Shaped Box',
-      n:5,
-      artista:'Nirvana'},
-    { capa: 'albums/albumArt7.png',
-      album:'Alive',
-      musica:'/music/Alive - Pearl Jam.flac',
-      titulo:'Alive',
-      n:6,
-      artista:'Pearl Jam'},
-    { capa: 'albums/albumArt8.png',
-      album:'Surfer Rosa',
-      musica:'/music/gigantic-hd.mp3',
-      titulo:'Gigantic',
-      n:7,
-      artista:'Pixies'},
-    { capa: 'albums/albumArt9.png',
-      album:'Facelift',
-      musica:'/music/man-in-the-box-official-video.mp3',
-      titulo:'Man In The Box',
-      n:8,
-      artista:'Alice In Chains'},
-  ];
-
+const list=[];
 var cont=0;
 
 export class PlaylistPrincipal extends React.Component{
@@ -75,12 +20,16 @@ export class PlaylistPrincipal extends React.Component{
         this.state={
             index: 0,
             src: localStorage.getItem('perfil'),
-            user: localStorage.getItem('user')
+            user: localStorage.getItem('user'),
+            titulo: '',
+            capa: '',
+            artista: '',
+            musica: ''
         };
     }
 
     avancar(){
-        if(8>cont){
+        if(this.state.titulo.length>cont+1){
             cont++;
             this.setState({index:cont});
         }
@@ -98,18 +47,53 @@ export class PlaylistPrincipal extends React.Component{
         this.setState({index:cont});
     }
 
+    componentDidMount(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+
+      api.get("projects/playlists/"+id)
+              .then(response => {
+                var titulo=[], capa=[], artista=[], musica=[];
+                response.data.musicas.map((item)=>{
+                  titulo.push(item.title);
+                  capa.push('http://localhost:8080/projects/imgs/'+response.data.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'));
+                  artista.push(response.data.playlist.user.name);
+                  musica.push('http://localhost:8080/projects/music/'+item.title+'.flac?jwt=Bearer '+localStorage.getItem('login'));
+                  list.push(
+                    {
+                    'titulo':item.title,
+                    'capa':'http://localhost:8080/projects/imgs/'+response.data.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
+                    'artista':response.data.playlist.user.name,
+                    'album':response.data.playlist.title
+                  }
+                  );
+                });
+                console.log(list);
+                this.setState({
+                  album:response.data.playlist.title, 
+                  titulo:titulo, 
+                  capa:capa, 
+                  artista:artista, 
+                  musica:musica
+                });
+              })
+              .catch(response => {
+                console.log(response);
+              });
+    }
+
     render(){
-        const fila = list.map((list)=>
-        <div className="filaItem" onClick={this.trocarMusica} valor={list.n}>
-            <h6 valor={list.n}>{list.n+1}</h6>
-            <img src={list.capa} valor={list.n}/>
-            <div className="textoFila" valor={list.n}>
-                <h6 id="titulo" valor={list.n}>{list.titulo}</h6>
-                <h6 valor={list.n}>{list.artista}</h6>
+        const fila = list.map((list, n)=>
+        <div className="filaItem" onClick={this.trocarMusica} valor={n}>
+            <h6 valor={n}>{n+1}</h6>
+            <img src={list.capa} valor={n}/>
+            <div className="textoFila" valor={n}>
+                <h6 id="titulo" valor={n}>{list.titulo}</h6>
+                <h6 valor={n}>{list.artista}</h6>
             </div>
-            <h6 id="tituloAlbum" valor={list.n}>{list.album}</h6>
+            <h6 id="tituloAlbum" valor={n}>{list.album}</h6>
             <div className="tempoItem">
-                <h6 valor={list.n}>4:56</h6>
+                <h6 valor={n}>4:56</h6>
             </div>
         </div>
         );
@@ -121,7 +105,7 @@ export class PlaylistPrincipal extends React.Component{
                     <main>
                         <Navbar src={this.state.src} user={this.state.user}/>
                         <div id="content">
-                            <CabecalhoPerfilPlaylist img="albums/albumArt.png" titulo="Album" nome="Unplugged" subtitulo="Alice In Chains - 1996 - 13 musicas, 1h 11min"/>
+                            <CabecalhoPerfilPlaylist img={this.state.capa[0]} titulo={"Album"} nome={this.state.album} subtitulo={this.state.artista[0]+', '+this.state.titulo.length+' musicas'}/>
                             <div id="fila">
                                 <div>{fila}</div>
                             </div>
@@ -129,7 +113,7 @@ export class PlaylistPrincipal extends React.Component{
                     </main>
                     <Aside/>
                     </div>
-                    <Player capa={list[this.state.index].capa} titulo={list[this.state.index].titulo} artista={list[this.state.index].artista} musica={list[this.state.index].musica} avancar={this.avancar} voltar={this.voltar}/>
+                    <Player capa={this.state.capa[this.state.index]} titulo={this.state.titulo[this.state.index]} artista={this.state.artista[this.state.index]} musica={this.state.musica[this.state.index]} avancar={this.avancar} voltar={this.voltar}/>
             </div>
         </div>
     }

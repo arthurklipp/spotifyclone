@@ -12,6 +12,10 @@
     width: 240px;
 }
 
+#Perfil{
+    border-radius: 100%;
+}
+
 .infosPerfil{
     margin-top: auto;
     margin-left: 10px;

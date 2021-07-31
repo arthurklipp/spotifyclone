@@ -31,21 +31,27 @@ export class Login extends Component{
         'password':this.state.senha
       })
     })
-    const resposta = await request.json();
-    if(resposta.token!= null){
+    try{
+      const resposta = await request.json();
+
       localStorage.setItem('login', resposta.token);
       localStorage.setItem('user', resposta.user.name);
-      localStorage.setItem('perfil', 'http://localhost:8080/uploads/'+resposta.user.perfil);
+      localStorage.setItem('perfil', 'http://localhost:8080/projects/imgs/'+resposta.user.perfil+'?jwt=Bearer '+resposta.token);
       localStorage.setItem('email', resposta.user.email);
       localStorage.setItem('id', resposta.user._id);
+
+      if(resposta.queue!=null){
+        var queue=[];
+        resposta.queue.musics.map(music => queue.push(music.assignedTo));
+        localStorage.setItem('fila', JSON.stringify(queue));
+      }else{
+        localStorage.setItem('fila', null);
+      }
       window.location.href="/home";
-    }else{
-      localStorage.removeItem('login');
-      localStorage.removeItem('user');
-      localStorage.removeItem('perfil');
-      localStorage.removeItem('email');
-      localStorage.removeItem('id');
+    }catch(err){
+      console.log(err);
     }
+    
 }
     render(){
     return (

@@ -2,34 +2,35 @@ import React, { Component } from 'react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import './style.css';
 
-
 // list of items
 const list = [
-  { capa: 'albums/albumArt.png',
-    album:'Unplugged',
-    artista:'Alice In Chains'},
-  { capa: 'albums/The_Getaway.jpg',
-    album:'The Gataway',
-    artista:'Red Hot Chilli Peppers'},
-  { capa: 'albums/albumArt3.png',
+  { capa: 'http://localhost:8080/projects/imgs/albumArt3.png?jwt=Bearer '+localStorage.getItem('login'),
     album:'Use Your Ilusion II',
     artista:"Guns N' Roses"},
-  { capa: 'albums/albumArt4.png',
+  { capa: 'http://localhost:8080/projects/imgs/albumArt4.png?jwt=Bearer '+localStorage.getItem('login'),
     album:'In Rainbows',
     artista:'Radiohead'},
-  { capa: 'albums/albumArt5.png',
+  { capa: 'http://localhost:8080/projects/imgs/albumArt.png?jwt=Bearer '+localStorage.getItem('login'),
+    album:'Unplugged',
+    artista:'Alice In Chains',
+    id:'60f9a625cd374135bc7d2ebe'},
+  { capa: 'http://localhost:8080/projects/imgs/ten.png?jwt=Bearer '+localStorage.getItem('login'),
+    album:'Ten',
+    artista:'Pearl Jam',
+    id:'60ffddbb65f2dd36004ec53a'},
+  { capa: 'http://localhost:8080/projects/imgs/albumArt5.png?jwt=Bearer '+localStorage.getItem('login'),
     album:'Dolittle',
     artista:'Pixies'},
-  { capa: 'albums/albumArt6.png',
+  { capa: 'http://localhost:8080/projects/imgs/albumArt6.png?jwt=Bearer '+localStorage.getItem('login'),
     album:'In Utero',
     artista:"Nirvana"},
-  { capa: 'albums/albumArt7.png',
+  { capa: 'http://localhost:8080/projects/imgs/ten.png?jwt=Bearer '+localStorage.getItem('login'),
     album:'Alive',
     artista:'Pearl Jam'},
-  { capa: 'albums/albumArt8.png',
+  { capa: 'http://localhost:8080/projects/imgs/albumArt8.png?jwt=Bearer '+localStorage.getItem('login'),
     album:'Surfer Rosa',
     artista:'Pixies'},
-  { capa: 'albums/albumArt9.png',
+  { capa: 'http://localhost:8080/projects/imgs/albumArt9.png?jwt=Bearer '+localStorage.getItem('login'),
     album:'Facelift',
     artista:"Alice In Chains"},
 ];
@@ -38,7 +39,7 @@ function Album(props){
         return(
           <div className='album'>
             <img className='albumArt'src={props.capa}/>
-            <a href="/playlist">
+            <a href={"/playlist/?id="+props.id}>
               <div className='textoAlbum'>{props.album}</div>
             </a>
             <div className='texto'>{props.artista}</div>
@@ -58,25 +59,13 @@ function Pessoa(props){
 }
 // One item component
 // selected prop will be passed
-const MenuItem = ({capa,album, artista, tipo}) => {
+const MenuItem = ({capa,album, artista, tipo, id}) => {
   if(tipo!=1){
-    return <Album capa={capa} album={album} artista={artista}/>
+    return <Album capa={capa} album={album} artista={artista} id={id}/>
   }else{
     return <Pessoa capa={capa} album={album}/>
   }
 };
-
-// All items component
-// Important! add unique key
-export const Menu = (list, selected, tipo) =>
-  list.map(el => {
-    const {capa} = el;
-    const {album} = el;
-    const {artista} = el;
-
-    return <MenuItem capa={capa} album={album} artista={artista} key={capa} selected={selected} tipo={tipo}/>;
-  });
-
 
 const Arrow = ({ text, className }) => {
   return (
@@ -95,8 +84,6 @@ const selected = 'item1';
 export class Scroll extends Component {
   constructor(props) {
     super(props);
-    // call it again if items count changes
-    this.menuItems = Menu(list, selected, this.props.tipo);
   }
 
   state = {
@@ -107,25 +94,34 @@ export class Scroll extends Component {
     this.setState({ selected: key });
   }
 
-
   render() {
     const { selected } = this.state;
-    // Create menu from items
-    const menu = this.menuItems;
 
+    if(this.props.list[0].titulo==''){ 
+      return null;
+    }
+    
     return (
         <div>
           <div className="textoAlbum">{this.props.header}</div>
-        <ScrollMenu
-        wheel={false}
-        alignCenter={false}
-          data={menu}
-          selected={selected}
-          onSelect={this.onSelect}
-        />
+          <ScrollMenu
+          wheel={false}
+          alignCenter={false}
+            data={
+              this.props.list.map(item=>{
+                return <MenuItem capa={item.capa} album={item.album} id={item.id} artista={item.artista} key={this.props.capa} selected={selected} tipo={this.props.tipo}/>;
+              })
+            }
+            selected={selected}
+            onSelect={this.onSelect}
+          />
         </div>
     );
   }
 }
+
+Scroll.defaultProps = {
+  list: list
+};
 
 export default Scroll

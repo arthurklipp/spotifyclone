@@ -7,6 +7,7 @@ const crypto = require('crypto');
 const mailer = require('../modules/mailer');
 
 const authConfig = require('../config/auth');
+const Playlist = require('../models/Playlist');
 
 function generateToken(params = {}){
     return jwt.sign(params, authConfig.secret, {
@@ -42,9 +43,12 @@ router.post('/login', async (req, res) =>{
     
     user.password = undefined;
 
+    var queue = await Playlist.findOne({user: user.id, title: 'queue'}).populate(['musics']);
+
     res.send({
         user, 
-        token: generateToken({id: user.id})
+        token: generateToken({id: user.id}),
+        queue
     });
 });
 

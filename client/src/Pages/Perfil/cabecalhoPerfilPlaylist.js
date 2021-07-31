@@ -4,7 +4,7 @@ export class CabecalhoPerfilPlaylist extends React.Component{
 
     render(){
         return <div className="headere">
-                    <img src={this.props.img}/>
+                    <img src={this.props.img} id={this.props.titulo}/>
                     <div className="infosPerfil">
                         <p className='texto font-weight-bold'>{this.props.titulo}</p>
                         <h1>{this.props.nome}</h1>

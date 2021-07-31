@@ -7,7 +7,7 @@ const router = express.Router();
 
 const User = require('../models/User');
 const Playlist = require('../models/Playlist');
-const Music = require('../models/Music');
+const Music = require('../models/Music');           const cors = require('cors');   router.use(cors());
 
 
 const fs = require("fs");
@@ -15,6 +15,10 @@ const path = require("path");
 const { promisify } = require("util");
 
 router.use(authMiddleware);
+router.use('/music', express.static(path.join(__dirname, '../../public/musics')));
+router.use('/imgs', express.static(path.join(__dirname, '../../public/imgs/perfil')));
+router.use('/imgs', express.static(path.join(__dirname, '../../public/imgs/playlist')));
+router.use('/imgs', express.static(path.join(__dirname, '../../public/imgs/album')));
 
 router.get('/',(req,res) =>{
     res.send({ok: true, user: req.userId})
@@ -104,10 +108,22 @@ router.get('/:userId', async(req, res) => {
     }
 });
 
+router.post('/musics/show', async(req, res) => {
+
+    const music = await Music.find({_id: {$in:req.body.music}}).populate(['assignedTo', 'playlist']);
+    const rock = await User.find({genero: 'rock'});
+    const rap = await User.find({genero: 'rap'});
+    const brasil = await User.find({genero: 'rap'});
+    const podcast = await User.find({genero: 'rap'});
+
+
+    res.send({music, rock, rap, brasil, podcast});
+});
+
 router.get('/playlists/:playlistId', async(req, res) => {
     try{
-        const playlist = await Playlist.find({_id: req.params.playlistId});
-        const musicas = await Music.find({_id: {$in:req.body.music}});
+        const playlist = await Playlist.findOne({_id: req.params.playlistId}).populate(['user']);
+        const musicas = await Music.find({_id: {$in:playlist.musics}});
 
         return res.send({ playlist, musicas });
     }catch(err){
@@ -153,13 +169,18 @@ router.put('/playlists/:playlistId', async(req, res) => {
 
 router.delete('/:playlistId', async(req, res) => {
 
-    const playlist = await Playlist.find({_id: {$in: req.params.playlistId}});
+    const playlist = await Playlist.findById(req.params.playlistId);
 
-    if(req.userId != playlist[0].user){
+    if(req.userId != playlist.user){
         return res.status(400).send({error: 'error delete playlist(No authorized)'});
     }
 
     try{
+        if(playlist.img!="album.png"){
+            promisify(fs.unlink)(
+                path.resolve(__dirname, '..', '..', 'public', 'imgs', 'playlist', playlist.img)
+              );
+        }
         await Playlist.findByIdAndRemove(req.params.playlistId);
         await Music.remove({ playlist: req.params.playlistId });
 
