@@ -72,11 +72,6 @@
 }
 
 .modalPlaylist{
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    position: absolute;
-    background-color: rgba(0, 0, 0, .5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -112,6 +107,11 @@
 }
 .modalPlaylist img{
     height: 210px;
+}
+
+.erro{
+    margin-top: 5px;
+    color: red;
 }
 
 .descricao textarea{

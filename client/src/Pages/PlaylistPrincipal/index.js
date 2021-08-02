@@ -71,6 +71,7 @@ export class PlaylistPrincipal extends React.Component{
                 console.log(list);
                 this.setState({
                   album:response.data.playlist.title, 
+                  capaAlbum: 'http://localhost:8080/projects/imgs/'+response.data.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'), 
                   titulo:titulo, 
                   capa:capa, 
                   artista:artista, 
@@ -105,7 +106,7 @@ export class PlaylistPrincipal extends React.Component{
                     <main>
                         <Navbar src={this.state.src} user={this.state.user}/>
                         <div id="content">
-                            <CabecalhoPerfilPlaylist img={this.state.capa[0]} titulo={"Album"} nome={this.state.album} subtitulo={this.state.artista[0]+', '+this.state.titulo.length+' musicas'}/>
+                            <CabecalhoPerfilPlaylist img={this.state.capaAlbum} titulo={"Album"} nome={this.state.album} subtitulo={this.state.artista[0]+', '+this.state.titulo.length+' musicas'}/>
                             <div id="fila">
                                 <div>{fila}</div>
                             </div>

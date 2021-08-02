@@ -10,6 +10,7 @@
 .headere img{
     margin-top: auto;
     width: 240px;
+    height: 240px;
 }
 
 #Perfil{
@@ -36,4 +37,38 @@
 #content{
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+item{
+    width: 700px;
+    height: 360px;
+    background-color: rgb(40,40,40);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .5), 0 6px 20px 0 rgba(0, 0, 0, .5);
+}
+
+item h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+item img{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+item input{
+    width: 200px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+#select{
+    color:white;
 }

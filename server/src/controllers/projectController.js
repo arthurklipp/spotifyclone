@@ -66,18 +66,25 @@ router.post('/playlistImg/:playlistId', multer(multerConfig2).single('file'), as
 });
 
 router.post('/playlist', async(req, res) => {
+
+    if(req.body.title==""){
+        return res.status(400).send({error: 'title required'});
+    }
+
     try{
         const { title, description, musics } = req.body;
 
         const playlist = await Playlist.create({title, description, user: req.userId});
 
-        await Promise.all(musics.map(async music =>{
-            const playlistMusic = new Music({assignedTo: music.assignedTo, playlist: playlist._id});
-
-            await playlistMusic.save();
-
-            playlist.musics.push(playlistMusic);
-        }));
+        if(musics!=null){
+            await Promise.all(musics.map(async music =>{
+                const playlistMusic = new Music({assignedTo: music.assignedTo, playlist: playlist._id});
+    
+                await playlistMusic.save();
+    
+                playlist.musics.push(playlistMusic);
+            }));
+        }
 
         await playlist.save();
 

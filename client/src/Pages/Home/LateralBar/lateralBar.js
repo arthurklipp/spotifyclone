@@ -1,6 +1,62 @@
 import React, { Component } from 'react';
+import api from '../../../api';
+import Modal from '../../../components/modal/modal';
 import './lateralBar.css';
 
+class CriarPlaylist extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+      titulo: '',
+      descricao: '',
+      erro: false
+    };
+    this.criar=this.criar.bind(this);
+  }
+
+  async criar(){
+    try{
+      await api.post('projects/playlist', {title: this.state.titulo, description: this.state.descricao});
+      this.props.esconderModal();
+    }catch(err){
+      this.setState({erro: true});
+    }
+  }
+
+  render(){
+    return <div className="modalPlaylist">
+            <div className="modalItem">
+                  <div className="cabecalho">
+                    <h5 className="textoAlbum">Criar playlist</h5>
+                  </div>
+                  <div className="main">
+                      <img src="album.png"/>
+                      <div className="inputs">
+                            <p className="texto">Nome*</p>
+                            <input placeholder="Minha playlist" value={this.state.titulo} onChange={(e)=>this.setState({titulo: e.target.value})}/>
+                            <Erro erro={this.state.erro}/>
+                        <div className="descricao">
+                          <p className="texto">Descrição</p>
+                          <textarea placeholder="Faça uma descrição sugestiva da sua playlist" value={this.state.descricao} onChange={(e)=>this.setState({descricao: e.target.value})}/>
+                          </div>
+                        </div>
+                    </div>
+                    <div className="rodape">
+                      <button type="button" id='botaoCriar' className="btn btn-primary btn-lg rounded-pill font-weight-bold">
+                            <div className='textoBotao' onClick={this.criar}>CRIAR</div>
+                          </button>
+                      </div>
+                </div>
+              </div>
+      }
+  }
+
+function Erro(props){
+  if(!props.erro){
+    return null
+  }
+  return <p className='erro'>Escolha um nome*</p>
+}
 
 export class LateralBar extends Component {
   constructor(props){
@@ -13,44 +69,21 @@ export class LateralBar extends Component {
   }
 
   mostrarModal(){
-    this.state.modal ? (this.setState({modal:false})): (this.setState({modal:true}));
+      this.setState({modal:!this.state.modal});
   }
 
-  esconderModal(event){
-      let modal=document.getElementsByClassName("modalPlaylist");
-      console.log(event.target);
-      console.log(modal);
-      if (event.target == modal[0]) {
-          this.setState({modal:false})
-      }
+  esconderModal(e){
+    if(e.target.tagName=='MODAL'){
+          this.setState({modal:!this.state.modal});
+      };
   }
 
   render() {
     return (
       <div className="telaLateralbar">
-        <div onClick={this.esconderModal} className={this.state.modal?("modalPlaylist"):("modalPlaylist invisible")}>
-            <div className="modalItem">
-              <div className="cabecalho">
-                <h5 className="textoAlbum">Criar playlist</h5>
-              </div>
-              <div className="main">
-                  <img src="album.png"/>
-                  <div className="inputs">
-                        <p className="texto">Nome</p>
-                        <input placeholder="Minha playlist"/>
-                    <div className="descricao">
-                      <p className="texto">Descrição</p>
-                      <textarea placeholder="Faça uma descrição sugestiva da sua playlist"/>
-                      </div>
-                    </div>
-                </div>
-                <div className="rodape">
-                  <button type="button" id='botaoCriar' className="btn btn-primary btn-lg rounded-pill font-weight-bold">
-                        <div className='textoBotao' >CRIAR</div>
-                      </button>
-                  </div>
-            </div>
-          </div>
+        <Modal show={this.state.modal} alternarModal={this.esconderModal}>
+          <CriarPlaylist esconderModal={this.mostrarModal}/>
+        </Modal>
           <div className='lateralBar'>
                 <div className='header'>
                     <h1>...</h1>
