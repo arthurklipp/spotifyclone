@@ -118,13 +118,13 @@ router.get('/:userId', async(req, res) => {
 router.post('/musics/show', async(req, res) => {
 
     const music = await Music.find({_id: {$in:req.body.music}}).populate(['assignedTo', 'playlist']);
-    const rock = await User.find({genero: 'rock'});
+    /*const rock = await User.find({genero: 'rock'});
     const rap = await User.find({genero: 'rap'});
     const brasil = await User.find({genero: 'rap'});
-    const podcast = await User.find({genero: 'rap'});
+    const podcast = await User.find({genero: 'rap'});*/
 
 
-    res.send({music, rock, rap, brasil, podcast});
+    res.send({music});
 });
 
 router.get('/playlists/:playlistId', async(req, res) => {

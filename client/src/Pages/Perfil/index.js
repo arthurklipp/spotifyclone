@@ -20,17 +20,43 @@ function UploadFoto(props){
         </item>;
 }
 
+var cont=0;
+
 export class Perfil extends React.Component{
     constructor(props){
         super(props);
             this.state={
                 src:localStorage.getItem('perfil'),
                 user:localStorage.getItem('user'),
+                musica:[{
+                    titulo: '',
+                    capa: '',
+                    album: '',
+                    artista: '',
+                    src: '',
+                }],
+                index: 0,
                 modal: false
             };
         this.fileInput = React.createRef();
         this.processUpload = this.processUpload.bind(this);
         this.alternarModal = this.alternarModal.bind(this);
+        this.avancar = this.avancar.bind(this);
+        this.voltar = this.voltar.bind(this);
+    }
+
+    avancar(){
+        if(this.state.musica.length>cont+1){
+            cont++;
+            this.setState({index:cont});
+        }
+    }
+    
+    voltar(){
+        if(cont>0){
+            cont--;
+            this.setState({index:cont});
+        }
     }
 
     processUpload(event){
@@ -55,6 +81,32 @@ export class Perfil extends React.Component{
         };
     }
 
+    async componentDidMount(){
+        try{
+          var musica=[];
+    
+          const response = await api.post("projects/musics/show", {music: JSON.parse(localStorage.getItem('fila'))});
+          
+          response.data.music.map((item)=>{
+            musica.push({
+              titulo: item.title,
+              capa: 'http://localhost:8080/projects/imgs/'+item.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
+              album: item.playlist.title,
+              id: item.playlist._id,
+              artista: item.assignedTo.name,
+              src: 'http://localhost:8080/projects/music/'+item.title+'.flac?jwt=Bearer '+localStorage.getItem('login')
+            });
+          });
+          if(musica[0]!=null){
+            this.setState({
+              musica: musica
+            });
+          }
+        }catch(err){
+          console.log(err);
+        }
+      }
+
     render(){
         return <div className="layout">
             <Modal show={this.state.modal} alternarModal={this.alternarModal}>
@@ -71,7 +123,7 @@ export class Perfil extends React.Component{
                     </main>
                     <Aside/>
                     </div>
-                    <Player/>
+                    <Player capa={this.state.musica[this.state.index].capa} titulo={this.state.musica[this.state.index].titulo} artista={this.state.musica[this.state.index].artista} musica={this.state.musica[this.state.index].src} avancar={this.avancar} voltar={this.voltar}/>
             </div>
     }
 }

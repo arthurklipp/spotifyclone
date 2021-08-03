@@ -30,7 +30,7 @@ class CriarPlaylist extends Component{
                     <h5 className="textoAlbum">Criar playlist</h5>
                   </div>
                   <div className="main">
-                      <img src="album.png"/>
+                      <img src={'http://localhost:8080/projects/imgs/album.png?jwt=Bearer '+localStorage.getItem('login')}/>
                       <div className="inputs">
                             <p className="texto">Nome*</p>
                             <input placeholder="Minha playlist" value={this.state.titulo} onChange={(e)=>this.setState({titulo: e.target.value})}/>
