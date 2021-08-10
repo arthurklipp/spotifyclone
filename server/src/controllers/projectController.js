@@ -107,24 +107,36 @@ router.get('/playlist', async(req, res) => {
 
 router.get('/:userId', async(req, res) => {
     try{
-        const playlists = await Playlist.find({user: req.params.userId}).populate(['user', 'musics']);
+        const playlists = await Playlist.find({user: req.params.userId});
+        const user = await User.findOne({_id: req.params.userId});
 
-        return res.send({ playlists });
+        return res.send({ playlists, user});
     }catch(err){
         return res.status(400).send({error: 'error loading playlists'});
+    }
+});
+
+router.get('/musics/:music', async(req, res) => {
+    try{
+        const musics = await Music.find({title: req.params.music}).populate(['assignedTo', 'playlist']);
+        const artists = await User.find({name: req.params.music});
+
+        return res.send({ musics, artists });
+    }catch(err){
+        return res.status(400).send({error: 'error loading musics'});
     }
 });
 
 router.post('/musics/show', async(req, res) => {
 
     const music = await Music.find({_id: {$in:req.body.music}}).populate(['assignedTo', 'playlist']);
-    /*const rock = await User.find({genero: 'rock'});
-    const rap = await User.find({genero: 'rap'});
+    const rock = await User.find({genero: 'rock'});
+    /*const rap = await User.find({genero: 'rap'});
     const brasil = await User.find({genero: 'rap'});
     const podcast = await User.find({genero: 'rap'});*/
 
 
-    res.send({music});
+    res.send({music, rock});
 });
 
 router.get('/playlists/:playlistId', async(req, res) => {

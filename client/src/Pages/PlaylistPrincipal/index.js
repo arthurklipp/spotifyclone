@@ -36,6 +36,7 @@ export class PlaylistPrincipal extends React.Component{
             index: 0,
             modal: false,
             tipo:'Playlist',
+            userID: null,
             src: localStorage.getItem('perfil'),
             user: localStorage.getItem('user'),
             musica:[{
@@ -77,10 +78,10 @@ export class PlaylistPrincipal extends React.Component{
     
         api.post("projects/playlistImg/"+id, data)
           .then(response => {
-            this.setState({capaAlbum: 'http://localhost:8080/projects/imgs/'+response.data.img+'?jwt=Bearer '+localStorage.getItem('login')});
+            this.setState({capa: 'http://localhost:8080/projects/imgs/'+response.data.img+'?jwt=Bearer '+localStorage.getItem('login')});
           })
-          .catch(() => {
-            console.log("merda");
+          .catch((err) => {
+            console.log(err);
           });
       };
 
@@ -97,7 +98,11 @@ export class PlaylistPrincipal extends React.Component{
       try{
         var response = await api.get("projects/playlists/"+id);
               
-                var musica=[];
+        var musica=[];
+
+        this.setState({
+            userID: response.data.playlist.user._id
+        });
                 
                 if(response.data.playlist.description=='Album'){
                     this.setState({
@@ -147,25 +152,15 @@ export class PlaylistPrincipal extends React.Component{
     }
 
     render(){
-        /*const fila = this.state.musica.map((list, n)=>
-        <div className="filaItem" onClick={this.trocarMusica} valor={n}>
-            <h6 valor={n}>{n+1}</h6>
-            <img src={list.capa} valor={n}/>
-            <div className="textoFila" valor={n}>
-                <h6 id="titulo" valor={n}>{list.titulo}</h6>
-                <h6 valor={n}>{list.artista}</h6>
-            </div>
-            <h6 id="tituloAlbum" valor={n}>{list.album}</h6>
-            <div className="tempoItem">
-                <h6 valor={n}>4:56</h6>
-            </div>
-        </div>
-        );*/
+        let modal;
 
+        if(this.state.userID==localStorage.getItem('id')){
+            modal = <Modal show={this.state.modal} alternarModal={this.alternarModal}>
+                        <UploadFoto img={this.state.capa} processUpload={this.processUpload} fileInput={this.fileInput}/>
+                    </Modal>
+        }
         return <div>
-            <Modal show={this.state.modal} alternarModal={this.alternarModal}>
-                <UploadFoto img={this.state.capa} processUpload={this.processUpload} fileInput={this.fileInput}/>
-            </Modal>
+            {modal}
             <div className="layout">
                 <div className="parteCima">
                     <LateralBar/>
@@ -174,7 +169,9 @@ export class PlaylistPrincipal extends React.Component{
                         <div id="content">
                             <CabecalhoPerfilPlaylist alternarModal={this.alternarModal} img={this.state.capa} titulo={this.state.tipo} nome={this.state.titulo} subtitulo={this.state.autor+', '+this.state.musica.length+' musicas'}/>
                             <div id="fila">
-                                <div>{this.state.musica.map((list, n)=><Fila trocarMusica={this.trocarMusica}list={list} n={n}/>)}</div>
+                                <div>
+                                    {this.state.musica.map((list, n)=><Fila trocarMusica={this.trocarMusica}list={list} n={n}/>)}
+                                    </div>
                             </div>
                         </div>
                     </main>
@@ -189,11 +186,8 @@ export class PlaylistPrincipal extends React.Component{
 function Fila(props){
     if(props.list.titulo==''){
         return <div className="filaItem" onClick={props.trocarMusica} valor={props.n}>
-        <div className="textoFila" valor={props.n}>
-            <h6 id="titulo" valor={props.n}>ADICIONAR MUSICA</h6>
-            <h6 valor={props.n}>{props.list.artista}</h6>
-        </div>
-    </div>
+                <h6 id="titulo" valor={props.n}>SEM MUSICAS</h6>
+            </div>
     }
     return <div className="filaItem" onClick={props.trocarMusica} valor={props.n}>
     <h6 valor={props.n}>{props.n+1}</h6>

@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import axios from 'axios';
+import Head from '../../components/head';
 
-export default class Register extends Component {
+export default class Register extends React.Component {
     constructor(props){
         super(props);
         this.state={
@@ -13,38 +14,35 @@ export default class Register extends Component {
       }
 
     async enviarDados(){
-        const request = await fetch('http://localhost:8080/auth/register', {
-            method: 'POST',
-            headers :{'Content-type': 'application/json'},
-            body:JSON.stringify({password:this.state.senha, email:this.state.email, name:this.state.nome})
-        })
-    const resposta = await request.json();
-    if(resposta.token!= null){
-        localStorage.setItem('login', resposta.token);
-        localStorage.setItem('user', resposta.user.name);
-        localStorage.setItem('perfil', 'http://localhost:8080/uploads/'+resposta.user.perfil);
-        localStorage.setItem('email', resposta.user.email);
-        localStorage.setItem('id', resposta.user._id);
-        window.location.href="/home";
-      }else{
-        localStorage.removeItem('login');
-        localStorage.removeItem('user');
-        localStorage.removeItem('perfil');
-        localStorage.removeItem('email');
-        localStorage.removeItem('id');
-      }
+        try {
+            const response = await axios.post("http://localhost:8080/auth/register",{email: this.state.email, password: this.state.senha, name: this.state.nome});
+            
+            localStorage.setItem('login', response.data.token);
+            localStorage.setItem('user', response.data.user.name);
+            localStorage.setItem('perfil', 'http://localhost:8080/projects/imgs/'+response.data.user.perfil+'?jwt=Bearer '+response.data.token);
+            localStorage.setItem('email', response.data.user.email);
+            localStorage.setItem('id', response.data.user._id);
+      
+            if(response.data.queue!=null){
+              var queue=[];
+              response.data.queue.musics.map(music => queue.push(music.assignedTo));
+              localStorage.setItem('fila', JSON.stringify(queue));
+            }else{
+              localStorage.setItem('fila', null);
+            }
+      
+            window.location.href="/home";
+        }catch(err){
+            console.log(err);
+        }
     }
     render(){
         return (
             <div>
-                <div className='head'>
-                    <img className='logo' src='Spotify_Logo_RGB_Black.png' />
-                </div>
+                <Head/>
                 <div className='login'>
-                    
-
                     <div className='row'>
-                        <button type="button" id='botaoFacebook' class="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
+                        <button type="button" id='botaoFacebook' className="btn btn-primary btn-lg btn-block rounded-pill font-weight-bold">
                             <div className='textoBotao'>INSCREVER-SE COM FACEBOOK</div>
                         </button>
                     </div>
@@ -57,31 +55,20 @@ export default class Register extends Component {
                     <p className='font-weight-bold text-center'>Inscrever-se com seu endereço de e-mail.</p>
                     <form>
                         <div className='row'>
-                            <input placeholder='Nome' type="text" class="form-control input" value={this.state.nome} onChange={(event)=>{this.setState({nome:event.target.value})}}/>
+                            <input placeholder='Nome' type="text" className="form-control input" value={this.state.nome} onChange={(event)=>{this.setState({nome:event.target.value})}}/>
                         </div>
                         <div className='row'>
-                            <input placeholder='E-mail' type="email" class="form-control" value={this.state.email} onChange={(event)=>{this.setState({email:event.target.value})}}/>
+                            <input placeholder='E-mail' type="email" className="form-control" value={this.state.email} onChange={(event)=>{this.setState({email:event.target.value})}}/>
                         </div>
                         <div className='row'>
-                            <input placeholder='Senha' type="password" class="form-control" value={this.state.senha} onChange={(event)=>{this.setState({senha:event.target.value})}} aria-describedby="emailHelp" />
+                            <input placeholder='Senha' type="password" className="form-control" value={this.state.senha} onChange={(event)=>{this.setState({senha:event.target.value})}} aria-describedby="emailHelp" />
                         </div>
-                        <div class="row" id='meio'>
-                            {/* <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                            <label class="form-check-label" for="exampleCheck1">Lembrar de mim</label> */}
-                            <button onClick={this.enviarDados} type="button" class="button btn btn-lg rounded-pill font-weight-bold mr-auto ml-auto" style={{width:"60%", height:"45px"}}>
+                        <div className="row" id='meio'>
+                            <button onClick={this.enviarDados} type="button" className="button btn btn-lg rounded-pill font-weight-bold mr-auto ml-auto" style={{width:"60%", height:"45px"}}>
                                 <div className='textoBotao' style={{color:"white"}}>INSCREVER-SE</div>
                             </button>
                         </div>
                     </form>
-                    {/*<div className='row divisor'>
-                        <p>Já tem uma conta?
-                            <Link to="/">
-                            <span className='textoDestacado' style={{cursor: "pointer"}}> Entrar</span>
-                            </Link>
-                        
-                        </p> 
-                        </div>*/}
-        
                 </div>
             </div>
 

@@ -51,7 +51,7 @@ function Pessoa(props){
         return(
           <div className='album'>
             <img className='albumArt perfil'src={props.capa}/>
-            <a href="/playlist">
+            <a href={"/perfil/?id="+props.id}>
               <div className='textoAlbum textoAlbumPerfil'>{props.album}</div>
             </a>
         </div>
@@ -63,7 +63,7 @@ const MenuItem = ({capa,album, artista, tipo, id}) => {
   if(tipo!=1){
     return <Album capa={capa} album={album} artista={artista} id={id}/>
   }else{
-    return <Pessoa capa={capa} album={album}/>
+    return <Pessoa capa={capa} album={album} id={id}/>
   }
 };
 

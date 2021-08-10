@@ -81,7 +81,7 @@ voltar(){
           id: item._id
         })
       })
-      response.data.rap.map((item)=>{
+      /*response.data.rap.map((item)=>{
         rap.push({
           album: item.name,
           capa: 'http://localhost:8080/projects/imgs/'+item.perfil+'?jwt=Bearer '+localStorage.getItem('login'),
@@ -101,12 +101,12 @@ voltar(){
           capa: 'http://localhost:8080/projects/imgs/'+item.perfil+'?jwt=Bearer '+localStorage.getItem('login'),
           id: item._id
         })
-      })
+      })*/
       this.setState({
         rock: musica,
-        rap: rap,
+        /*rap: rap,
         brasil: brasil,
-        podcast: podcast
+        podcast: podcast*/
       });
     }catch(err){
       console.log(err);

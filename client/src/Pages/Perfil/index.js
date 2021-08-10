@@ -21,13 +21,14 @@ function UploadFoto(props){
 }
 
 var cont=0;
-
+let playlists;
 export class Perfil extends React.Component{
     constructor(props){
         super(props);
             this.state={
                 src:localStorage.getItem('perfil'),
                 user:localStorage.getItem('user'),
+                header: "Playlists",
                 musica:[{
                     titulo: '',
                     capa: '',
@@ -85,7 +86,7 @@ export class Perfil extends React.Component{
         try{
           var musica=[];
     
-          const response = await api.post("projects/musics/show", {music: JSON.parse(localStorage.getItem('fila'))});
+          let response = await api.post("projects/musics/show", {music: JSON.parse(localStorage.getItem('fila'))});
           
           response.data.music.map((item)=>{
             musica.push({
@@ -102,23 +103,75 @@ export class Perfil extends React.Component{
               musica: musica
             });
           }
+          
+          const urlParams = new URLSearchParams(window.location.search);
+          const id = urlParams.get('id');
+          response = await api.get('/projects/'+id);
+
+          if(response.data.user.genero!=null){
+            this.setState({
+              header: "Albuns"
+            });
+          }
+          var playlists = [];
+          
+          response.data.playlists.map((item)=>{
+              playlists.push({
+                  album: item.title,
+                  descricao: item.description,
+                  capa: 'http://localhost:8080/projects/imgs/'+item.img+'?jwt=Bearer '+localStorage.getItem('login'),
+                  id: item._id
+              })
+          })
+          if(playlists[0]!=null){
+              this.setState({
+                  playlists: playlists
+              });
+          }else{
+            this.setState({
+              playlists: [{titulo: ''}]
+          });
+          }
+
+          this.setState({
+            src: 'http://localhost:8080/projects/imgs/'+response.data.user.perfil+'?jwt=Bearer '+localStorage.getItem('login'),
+            user: response.data.user.name
+          });
         }catch(err){
           console.log(err);
         }
       }
 
     render(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      let modal;
+      let navbar;
+      let cabecalhoPerfilPlaylist;
+
+      if(id==localStorage.getItem('id')){
+        modal = <Modal show={this.state.modal} alternarModal={this.alternarModal}>
+                  <UploadFoto img={this.state.src} processUpload={this.processUpload} fileInput={this.fileInput}/>
+                </Modal>;
+
+        navbar = <Navbar src={this.state.src} user={this.state.user}/>;
+
+        cabecalhoPerfilPlaylist = <CabecalhoPerfilPlaylist alternarModal={this.alternarModal}img={this.state.src} titulo="Perfil" nome={this.state.user} subtitulo="1 playlist * 7 seguidores * 14 seguindo"/>;
+      }else{
+        navbar = <Navbar src={localStorage.getItem('perfil')} user={localStorage.getItem('user')}/>;
+        
+        cabecalhoPerfilPlaylist = <CabecalhoPerfilPlaylist img={this.state.src} titulo="Perfil" nome={this.state.user} subtitulo="1 playlist * 7 seguidores * 14 seguindo"/>;
+      }
+
         return <div className="layout">
-            <Modal show={this.state.modal} alternarModal={this.alternarModal}>
-                <UploadFoto img={this.state.src} processUpload={this.processUpload} fileInput={this.fileInput}/>
-            </Modal>
+                {modal}
                 <div className="parteCima">
                     <LateralBar/>
                     <main>
-                        <Navbar src={this.state.src} user={this.state.user}/>
+                        {navbar}
                         <div id="content">
-                            <CabecalhoPerfilPlaylist alternarModal={this.alternarModal}img={this.state.src} titulo="Perfil" nome={this.state.user} subtitulo="1 playlist * 7 seguidores * 14 seguindo"/>
-                            <Playlist/>
+                            {cabecalhoPerfilPlaylist}
+                            <Playlist header={this.state.header} playlists={this.state.playlists}/>
                         </div>
                     </main>
                     <Aside/>
