@@ -64,7 +64,7 @@ export class Player extends Component {
                 <div id="artistaPlayer">{this.props.artista}</div>
                 </div>
             </musica>
-            <ReactAudioPlayer className="mainPlayer" src={this.props.musica} layout='stacked-reverse' showSkipControls={true} showJumpControls={false} /*customVolumeControls={[]}*/ onClickPrevious={this.props.voltar} onClickNext={this.props.avancar}/>
+            <ReactAudioPlayer className="mainPlayer" src={this.props.musica} layout='stacked-reverse' autoPlayAfterSrcChange={false} showSkipControls={true} showJumpControls={false} /*customVolumeControls={[]}*/ onClickPrevious={this.props.voltar} onClickNext={this.props.avancar}/>
             <controles>
               <div className="volume">
                 <i className="fas fa-volume-up"></i>

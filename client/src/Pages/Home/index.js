@@ -7,77 +7,69 @@ import Navbar from './Navbar/navbar';
 import Player from './Player/player';
 import api from '../../api';
 
-function head(){
-  
-    return (<div className='head'>
-              <img className='logo' src='Spotify_Logo_RGB_Black.png'/>
-            </div>
-    );
-}
+var cont = 0;
 
-var cont=0;
-
-export class Home extends React.Component{
-  constructor(props){
+export class Home extends React.Component {
+  constructor(props) {
     super(props);
-    this.avancar=this.avancar.bind(this);
-    this.voltar=this.voltar.bind(this);
-    this.state={
-      src:localStorage.getItem('perfil'),
+    this.avancar = this.avancar.bind(this);
+    this.voltar = this.voltar.bind(this);
+    this.state = {
+      src: localStorage.getItem('perfil'),
       user: localStorage.getItem('user'),
-      musica:[{
+      musica: [{
         titulo: '',
         capa: '',
         artista: '',
-        src:''
+        src: ''
       }],
       index: 0
     };
   }
 
-  avancar(){
-    if(this.state.musica.length>cont+1){
-        cont++;
-        this.setState({index:cont});
-    }
-}
-
-voltar(){
-    if(cont>0){
-        cont--;
-        this.setState({index:cont});
+  avancar() {
+    if (this.state.musica.length > cont + 1) {
+      cont++;
+      this.setState({ index: cont });
     }
   }
 
-  async componentDidMount(){
-    try{
-      var musica=[];
+  voltar() {
+    if (cont > 0) {
+      cont--;
+      this.setState({ index: cont });
+    }
+  }
 
-      const response = await api.post("projects/musics/show", {music: JSON.parse(localStorage.getItem('fila'))});
-      
-      response.data.music.map((item)=>{
+  async componentDidMount() {
+    try {
+      var musica = [];
+
+      const response = await api.post("projects/musics/show", { music: JSON.parse(localStorage.getItem('fila')) });
+
+      response.data.music.map((item) => {
         musica.push({
           titulo: item.title,
-          capa: 'http://localhost:8080/projects/imgs/'+item.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
+          capa: 'http://localhost:8080/projects/imgs/' + item.playlist.img + '?jwt=Bearer ' + localStorage.getItem('login'),
           album: item.playlist.title,
           id: item.playlist._id,
           artista: item.assignedTo.name,
-          src: 'http://localhost:8080/projects/music/'+item.title+'.flac?jwt=Bearer '+localStorage.getItem('login')
+          src: 'http://localhost:8080/projects/music/' + item.title + '.flac?jwt=Bearer ' + localStorage.getItem('login')
         });
       });
-      if(musica[0]!=null){
+      if (musica[0] != null) {
         this.setState({
           musica: musica
         });
       }
 
-      musica=[];
-      var rap=[], brasil=[], podcast=[];
+      musica = [];
+      var rap = [], brasil = [], podcast = [];
 
-      response.data.rock.map((item)=>{
+      response.data.rock.map((item) => {
         musica.push({
           album: item.name,
-          capa: 'http://localhost:8080/projects/imgs/'+item.perfil+'?jwt=Bearer '+localStorage.getItem('login'),
+          capa: 'http://localhost:8080/projects/imgs/' + item.perfil + '?jwt=Bearer ' + localStorage.getItem('login'),
           id: item._id
         })
       })
@@ -108,27 +100,27 @@ voltar(){
         brasil: brasil,
         podcast: podcast*/
       });
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   }
-  render(){
+  render() {
     return <div className="layout">
-              <div className="parteCima">
-                  <LateralBar/>
-                  <main>
-                  <Navbar src={this.state.src} user={this.state.user}/>
-                  <div className="scroll">
-                    <Scroll header="Tocados recentemente" list={this.state.musica}/>
-                    <Scroll header="Rock" list={this.state.rock} tipo={1}/>
-                    <Scroll header="Rap" list={this.state.rap} tipo={1}/>
-                    <Scroll header="Brasil" list={this.state.brasil}/>
-                    <Scroll header="Podcast" list={this.state.podcast}/>
-                    </div>
-                    </main>
-                  <Aside/>
-                </div>
-                <Player capa={this.state.musica[this.state.index].capa} titulo={this.state.musica[this.state.index].titulo} artista={this.state.musica[this.state.index].artista} musica={this.state.musica[this.state.index].src} avancar={this.avancar} voltar={this.voltar}/>
-            </div>
+      <div className="parteCima">
+        <LateralBar />
+        <main>
+          <Navbar src={this.state.src} user={this.state.user} />
+          <div className="scroll">
+            <Scroll header="Tocados recentemente" list={this.state.musica} />
+            <Scroll header="Rock" list={this.state.rock} tipo={1} />
+            <Scroll header="Rap" list={this.state.rap} tipo={1} />
+            <Scroll header="Brasil" list={this.state.brasil} />
+            <Scroll header="Podcast" list={this.state.podcast} />
+          </div>
+        </main>
+        <Aside />
+      </div>
+      <Player capa={this.state.musica[this.state.index].capa} titulo={this.state.musica[this.state.index].titulo} artista={this.state.musica[this.state.index].artista} musica={this.state.musica[this.state.index].src} avancar={this.avancar} voltar={this.voltar} />
+    </div>
   }
 }
