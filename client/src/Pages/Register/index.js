@@ -8,7 +8,8 @@ export default class Register extends React.Component {
         this.state={
           email:'',
           senha:'',
-          nome:''
+          nome:'',
+          erro: null
         };
         this.enviarDados = this.enviarDados.bind(this);
       }
@@ -30,10 +31,12 @@ export default class Register extends React.Component {
             }else{
               localStorage.setItem('fila', null);
             }
-      
+            alert("ATENÇÃO: Este projeto foi desenvolvido com o intuito de aprender programação. Para o continuo do mesmo é necessario muita refatoração de codigo e ajustes de estados/heranças de componentes.");
             window.location.href="/home";
         }catch(err){
-            console.log(err);
+            this.setState({
+                erro: 'Preencha todos os campos'
+            });
         }
     }
     render(){
@@ -63,6 +66,7 @@ export default class Register extends React.Component {
                         <div className='row'>
                             <input placeholder='Senha' type="password" className="form-control" value={this.state.senha} onChange={(event)=>{this.setState({senha:event.target.value})}} aria-describedby="emailHelp" />
                         </div>
+                        <Err msg={this.state.erro}/>
                         <div className="row" id='meio'>
                             <button onClick={this.enviarDados} type="button" className="button btn btn-lg rounded-pill font-weight-bold mr-auto ml-auto" style={{width:"60%", height:"45px"}}>
                                 <div className='textoBotao' style={{color:"white"}}>INSCREVER-SE</div>
@@ -74,4 +78,12 @@ export default class Register extends React.Component {
 
         )
     }
+}
+
+function Err(props){
+    return(
+        <div className="row">
+            <p className="text-danger">{props.msg}</p>
+        </div>
+    )
 }

@@ -16,6 +16,10 @@ const { promisify } = require("util");
 
 router.use(authMiddleware);
 router.use('/music', express.static(path.join(__dirname, '../../public/musics')));
+router.use('/music', express.static(path.join(__dirname, '../../public/musics/brasil')));
+router.use('/music', express.static(path.join(__dirname, '../../public/musics/rap')));
+router.use('/music', express.static(path.join(__dirname, '../../public/musics/rubel')));
+router.use('/music', express.static(path.join(__dirname, '../../public/musics/yung buda')));
 router.use('/imgs', express.static(path.join(__dirname, '../../public/imgs/perfil')));
 router.use('/imgs', express.static(path.join(__dirname, '../../public/imgs/playlist')));
 router.use('/imgs', express.static(path.join(__dirname, '../../public/imgs/album')));
@@ -78,7 +82,7 @@ router.post('/playlist', async(req, res) => {
 
         if(musics!=null){
             await Promise.all(musics.map(async music =>{
-                const playlistMusic = new Music({assignedTo: music.assignedTo, playlist: playlist._id});
+                const playlistMusic = new Music({assignedTo: music.assignedTo, playlist: playlist._id, title: music.title});
     
                 await playlistMusic.save();
     
@@ -131,12 +135,11 @@ router.post('/musics/show', async(req, res) => {
 
     const music = await Music.find({_id: {$in:req.body.music}}).populate(['assignedTo', 'playlist']);
     const rock = await User.find({genero: 'rock'});
-    /*const rap = await User.find({genero: 'rap'});
-    const brasil = await User.find({genero: 'rap'});
-    const podcast = await User.find({genero: 'rap'});*/
+    const rap = await User.find({genero: 'rap'});
+    const brasil = await User.find({genero: 'brasil'});
 
 
-    res.send({music, rock});
+    res.send({music, rock, rap, brasil});
 });
 
 router.get('/playlists/:playlistId', async(req, res) => {

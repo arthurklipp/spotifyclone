@@ -73,7 +73,7 @@ export class Perfil extends React.Component {
         localStorage.setItem('perfil', 'http://localhost:8080/projects/imgs/' + response.data.perfil + '?jwt=Bearer ' + localStorage.getItem('login'));
       })
       .catch(() => {
-        console.log("merda");
+        console.log("erro");
       });
   };
 
@@ -86,23 +86,26 @@ export class Perfil extends React.Component {
   async componentDidMount() {
     try {
       var musica = [];
+      let response;
 
-      let response = await api.post("projects/musics/show", { music: JSON.parse(localStorage.getItem('fila')) });
+      if (localStorage.getItem('fila') != 'null') {
+        response = await api.post("projects/musics/show", { music: JSON.parse(localStorage.getItem('fila')) });
 
-      response.data.music.map((item) => {
-        musica.push({
-          titulo: item.title,
-          capa: 'http://localhost:8080/projects/imgs/' + item.playlist.img + '?jwt=Bearer ' + localStorage.getItem('login'),
-          album: item.playlist.title,
-          id: item.playlist._id,
-          artista: item.assignedTo.name,
-          src: 'http://localhost:8080/projects/music/' + item.title + '.flac?jwt=Bearer ' + localStorage.getItem('login')
+        response.data.music.map((item) => {
+          musica.push({
+            titulo: item.title,
+            capa: 'http://localhost:8080/projects/imgs/' + item.playlist.img + '?jwt=Bearer ' + localStorage.getItem('login'),
+            album: item.playlist.title,
+            id: item.playlist._id,
+            artista: item.assignedTo.name,
+            src: 'http://localhost:8080/projects/music/' + item.title + '.flac?jwt=Bearer ' + localStorage.getItem('login')
+          });
         });
-      });
-      if (musica[0] != null) {
-        this.setState({
-          musica: musica
-        });
+        if (musica[0] != null) {
+          this.setState({
+            musica: musica
+          });
+        }
       }
 
       const urlParams = new URLSearchParams(window.location.search);
@@ -142,7 +145,7 @@ export class Perfil extends React.Component {
       console.log(err);
     }
   }
-  
+
   render() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');

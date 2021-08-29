@@ -57,6 +57,7 @@ export class Home extends React.Component {
           src: 'http://localhost:8080/projects/music/' + item.title + '.flac?jwt=Bearer ' + localStorage.getItem('login')
         });
       });
+      
       if (musica[0] != null) {
         this.setState({
           musica: musica
@@ -64,7 +65,7 @@ export class Home extends React.Component {
       }
 
       musica = [];
-      var rap = [], brasil = [], podcast = [];
+      var rap = [], brasil = [];
 
       response.data.rock.map((item) => {
         musica.push({
@@ -73,7 +74,7 @@ export class Home extends React.Component {
           id: item._id
         })
       })
-      /*response.data.rap.map((item)=>{
+      response.data.rap.map((item)=>{
         rap.push({
           album: item.name,
           capa: 'http://localhost:8080/projects/imgs/'+item.perfil+'?jwt=Bearer '+localStorage.getItem('login'),
@@ -87,18 +88,10 @@ export class Home extends React.Component {
           id: item._id
         })
       })
-      response.data.podcast.map((item)=>{
-        podcast.push({
-          album: item.name,
-          capa: 'http://localhost:8080/projects/imgs/'+item.perfil+'?jwt=Bearer '+localStorage.getItem('login'),
-          id: item._id
-        })
-      })*/
       this.setState({
         rock: musica,
-        /*rap: rap,
-        brasil: brasil,
-        podcast: podcast*/
+        rap: rap,
+        brasil: brasil
       });
     } catch (err) {
       console.log(err);
@@ -114,8 +107,7 @@ export class Home extends React.Component {
             <Scroll header="Tocados recentemente" list={this.state.musica} />
             <Scroll header="Rock" list={this.state.rock} tipo={1} />
             <Scroll header="Rap" list={this.state.rap} tipo={1} />
-            <Scroll header="Brasil" list={this.state.brasil} />
-            <Scroll header="Podcast" list={this.state.podcast} />
+            <Scroll header="Brasil" list={this.state.brasil} tipo={1}/>
           </div>
         </main>
         <Aside />

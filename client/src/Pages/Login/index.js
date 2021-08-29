@@ -9,7 +9,8 @@ export class Login extends Component{
     super(props);
     this.state={
       email:'arthurklipp10@gmail.com',
-      senha:'123'
+      senha:'123',
+      erro: null
     };
     this.login = this.login.bind(this);
   }
@@ -31,11 +32,13 @@ export class Login extends Component{
       }else{
         localStorage.setItem('fila', null);
       }
-
+      alert("ATENÇÃO: Este projeto foi desenvolvido com o intuito de aprender programação. Para o continuo do mesmo é necessario muita refatoração de codigo e ajustes de estados/heranças de componentes.");
       window.location.href="/home";
 
     } catch (err) {
-      console.log(err);
+      this.setState({
+        erro: "Usuario ou senha invalidos"
+      });
     }
   }
 
@@ -71,6 +74,7 @@ export class Login extends Component{
               <div className='row'>
                 <input value={this.state.senha} onChange={(event)=>{this.setState({senha:event.target.value})}} placeholder='Senha' type="password" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                 </div>
+              <Error err={this.state.erro}/>
                 <div className="row" id='meio'>
                     <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
                     <label className="form-check-label" for="exampleCheck1">Lembrar de mim</label>
@@ -107,3 +111,9 @@ export class Login extends Component{
 }
 }
 export default Login;
+
+function Error(props){
+  return <div className="row">
+    <p className="text-danger">{props.err}</p>
+  </div>
+}

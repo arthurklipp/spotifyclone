@@ -19,14 +19,20 @@ router.post('/register', async (req, res) =>{
     const email = req.body.email;
     const password = req.body.password;
     const name = req.body.name;
+    const genero = req.body.genero;
 
     try{
-        if(await User.findOne({ email }))
+        if(await User.findOne({ email })){
             return res.status(400).send({ error: 'user already exists' });
-        const user = await User.create({email, password, name});
+        }
+        if(name=='' || name==null){
+            return res.status(400).send({error: 'user name required'});
+        }
+        const user = await User.create({email, password, name, genero});
         user.password = undefined;
+
         return res.send({user,
-        token: generateToken({id: user.id}),
+        token: generateToken({id: user.id})
     });
     }catch(err){
         return res.status(400).send({error: 'Registration failed'});
