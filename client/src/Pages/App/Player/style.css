@@ -3,7 +3,7 @@
 }
 
 .mainPlayer{
-    background: rgb(24, 24, 24);
+    background: rgb(20, 20, 20);
     width: 40%;
     box-shadow: none;
 }
@@ -14,7 +14,7 @@ musica{
     width: 30%;
     height: 90px;
     padding: 15px;
-    background: rgb(24, 24, 24);
+    background: rgb(20, 20, 20);
 }
 
 #imgPlayer{
@@ -42,7 +42,7 @@ musica{
 controles{
     display: flex;
     width: 30%;
-    background-color: rgb(24, 24, 24);
+    background-color: rgb(20, 20, 20);
 }
 
 .volume{
@@ -68,6 +68,7 @@ controles{
 
 .imgAlbum{
     width: 100%;
+    display: none;
 }
 
 preto{

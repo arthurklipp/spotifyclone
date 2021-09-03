@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 export default class Navbar extends React.Component {
@@ -13,10 +14,12 @@ export default class Navbar extends React.Component {
             <button type="button" id='botaoUpgrade' className="btn btn-primary btn-block rounded-pill font-weight-bold">
                 <div className='textoBotao'>FAZER UPGRADE</div>
             </button>
-            <a href={"/perfil/?id=" + localStorage.getItem('id')} className="d-flex">
+            <Link to="/perfil/612b9a0159a8901690e4fddf">
+            <div className="d-flex">
                 <img id='foto' src={this.props.src} />
                 <p id='nome' className="branco">{this.props.user}</p>
-            </a>
+            </div>
+            </Link>
             <i id="seta" className="fas fa-chevron-down"></i>
         </div>
 

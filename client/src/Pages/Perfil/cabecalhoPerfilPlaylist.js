@@ -1,15 +1,12 @@
 import React from 'react';
 
-export class CabecalhoPerfilPlaylist extends React.Component{
-
-    render(){
-        return <div className="headere">
-                    <img onClick={this.props.alternarModal} src={this.props.img} id={this.props.titulo}/>
+export function CabecalhoPerfilPlaylist(props){
+        return (<div className="headere">
+                    <img onClick={props.alternarModal} src={props.img} id={props.titulo}/>
                     <div className="infosPerfil">
-                        <p className='texto font-weight-bold'>{this.props.titulo}</p>
-                        <h1>{this.props.nome}</h1>
-                        <p>{this.props.subtitulo}</p>
+                        <p className='texto font-weight-bold'>{props.titulo}</p>
+                        <h1>{props.nome}</h1>
+                        <p>{props.subtitulo}</p>
                     </div>
-                </div>
-    }
+                </div>)
 }

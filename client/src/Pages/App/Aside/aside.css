@@ -3,6 +3,7 @@
     padding-left: 25px;
     padding-right: 25px;
     display: flex;
+    margin-left: auto;
     align-items: center;
     background-image: linear-gradient(black , rgb(50,50,50),black);
   }

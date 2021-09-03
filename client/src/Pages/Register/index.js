@@ -20,7 +20,7 @@ export default class Register extends React.Component {
             
             localStorage.setItem('login', response.data.token);
             localStorage.setItem('user', response.data.user.name);
-            localStorage.setItem('perfil', 'http://localhost:8080/projects/imgs/'+response.data.user.perfil+'?jwt=Bearer '+response.data.token);
+            localStorage.setItem('perfil', 'http://localhost:8080/api/imgs/'+response.data.user.perfil+'?jwt=Bearer '+response.data.token);
             localStorage.setItem('email', response.data.user.email);
             localStorage.setItem('id', response.data.user._id);
       
@@ -31,8 +31,8 @@ export default class Register extends React.Component {
             }else{
               localStorage.setItem('fila', null);
             }
-            alert("ATENÇÃO: Este projeto foi desenvolvido com o intuito de aprender programação. Para o continuo do mesmo é necessario muita refatoração de codigo e ajustes de estados/heranças de componentes.");
-            window.location.href="/home";
+            
+            window.location.href="/";
         }catch(err){
             this.setState({
                 erro: 'Preencha todos os campos'

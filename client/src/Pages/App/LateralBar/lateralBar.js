@@ -17,7 +17,7 @@ class CriarPlaylist extends Component {
 
   async criar() {
     try {
-      await api.post('projects/playlist', { title: this.state.titulo, description: this.state.descricao });
+      await api.post('api/playlist', { title: this.state.titulo, description: this.state.descricao });
       this.props.esconderModal();
     } catch (err) {
       this.setState({ erro: true });
@@ -31,7 +31,7 @@ class CriarPlaylist extends Component {
           <h5 className="textoAlbum">Criar playlist</h5>
         </div>
         <div className="main">
-          <img src={'http://localhost:8080/projects/imgs/album.png?jwt=Bearer ' + localStorage.getItem('login')} />
+          <img src={'http://localhost:8080/api/imgs/album.png?jwt=Bearer ' + localStorage.getItem('login')} />
           <div className="inputs">
             <p className="texto">Nome*</p>
             <input placeholder="Minha playlist" value={this.state.titulo} onChange={(e) => this.setState({ titulo: e.target.value })} />
@@ -90,7 +90,7 @@ export class LateralBar extends Component {
             <h1>...</h1>
           </div>
           <div className='nav'>
-            <Link to="/home">
+            <Link to="/">
               <div className='navItem'>
                 <i className="fas fa-home fa-2x"></i>
                 <p className='texto font-weight-bold'>Inicio</p>

@@ -7,7 +7,9 @@ const router = express.Router();
 
 const User = require('../models/User');
 const Playlist = require('../models/Playlist');
-const Music = require('../models/Music');           const cors = require('cors');   router.use(cors());
+const Music = require('../models/Music');
+const cors = require('cors');
+router.use(cors());
 
 
 const fs = require("fs");
@@ -212,4 +214,4 @@ router.delete('/:playlistId', async(req, res) => {
     }
 });
 
-module.exports = app => app.use('/projects', router);
+module.exports = app => app.use('/api', router);

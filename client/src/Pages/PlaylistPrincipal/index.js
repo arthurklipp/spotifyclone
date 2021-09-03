@@ -1,11 +1,6 @@
 import React from 'react';
 import {CabecalhoPerfilPlaylist} from '../Perfil/cabecalhoPerfilPlaylist';
-import Aside from '../Home/Aside/aside';
-import LateralBar from '../Home/LateralBar/lateralBar';
 import Modal from '../../components/modal/modal';
-import Navbar from '../Home/Navbar/navbar';
-import { Playlist } from '../Playlist';
-import Player from '../Home/Player/player';
 import "./style.css";
 import api from '../../api';
 
@@ -92,11 +87,9 @@ export class PlaylistPrincipal extends React.Component{
     }
 
     async componentDidMount(){
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-
+      
       try{
-        var response = await api.get("projects/playlists/"+id);
+        var response = await api.get("api/playlists/"+this.props.match.params.id);
               
         var musica=[];
 
@@ -111,20 +104,20 @@ export class PlaylistPrincipal extends React.Component{
                     response.data.musicas.map((item)=>{
                         musica.push({
                             titulo: item.title,
-                            capa: 'http://localhost:8080/projects/imgs/'+response.data.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
+                            capa: 'http://localhost:8080/api/imgs/'+response.data.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
                             album: response.data.playlist.title,
                             artista: response.data.playlist.user.name,
-                            src: 'http://localhost:8080/projects/music/'+item.title+'.flac?jwt=Bearer '+localStorage.getItem('login')
+                            src: 'http://localhost:8080/api/music/'+item.title+'.flac?jwt=Bearer '+localStorage.getItem('login')
                             });
                     });
                     this.setState({
-                        capa: 'http://localhost:8080/projects/imgs/'+response.data.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
+                        capa: 'http://localhost:8080/api/imgs/'+response.data.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
                         titulo: response.data.playlist.title,
                         autor: response.data.playlist.user.name
                     });
                 }else{
                     this.setState({
-                        capa: 'http://localhost:8080/projects/imgs/'+response.data.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
+                        capa: 'http://localhost:8080/api/imgs/'+response.data.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
                         titulo: response.data.playlist.title,
                         autor: response.data.playlist.user.name
                     });
@@ -133,10 +126,10 @@ export class PlaylistPrincipal extends React.Component{
                     response.data.music.map((item)=>{
                         musica.push({
                             titulo: item.title,
-                            capa: 'http://localhost:8080/projects/imgs/'+item.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
+                            capa: 'http://localhost:8080/api/imgs/'+item.playlist.img+'?jwt=Bearer '+localStorage.getItem('login'),
                             album: item.playlist.title,
                             artista: item.assignedTo.name,
-                            src: 'http://localhost:8080/projects/music/'+item.title+'.flac?jwt=Bearer '+localStorage.getItem('login')
+                            src: 'http://localhost:8080/api/music/'+item.title+'.flac?jwt=Bearer '+localStorage.getItem('login')
                             });
                     });
                 }
@@ -163,9 +156,7 @@ export class PlaylistPrincipal extends React.Component{
             {modal}
             <div className="layout">
                 <div className="parteCima">
-                    <LateralBar/>
                     <main>
-                        <Navbar src={this.state.src} user={this.state.user}/>
                         <div id="content">
                             <CabecalhoPerfilPlaylist alternarModal={this.alternarModal} img={this.state.capa} titulo={this.state.tipo} nome={this.state.titulo} subtitulo={this.state.autor+', '+this.state.musica.length+' musicas'}/>
                             <div id="fila">
@@ -175,9 +166,7 @@ export class PlaylistPrincipal extends React.Component{
                             </div>
                         </div>
                     </main>
-                    <Aside/>
                     </div>
-                    <Player capa={this.state.musica[this.state.index].capa} titulo={this.state.musica[this.state.index].titulo} artista={this.state.musica[this.state.index].artista} musica={this.state.musica[this.state.index].src} avancar={this.avancar} voltar={this.voltar}/>
             </div>
         </div>
     }
