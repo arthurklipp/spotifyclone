@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { isAuthenticated } from './auth';
+import { isAuthenticated } from './services/auth';
 import Login from './Pages/Login/index';
-import { App } from './Pages/App/index';
+import { App } from './App';
 import Register from './Pages/Register/index';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';

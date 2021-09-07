@@ -1,7 +1,7 @@
 import React from 'react';
 import { CabecalhoPerfilPlaylist } from '../Perfil/cabecalhoPerfilPlaylist';
 import "./style.css";
-import api from '../../api';
+import api from '../../services/api';
 
 export class PlaylistPrincipal extends React.Component {
     constructor(props) {

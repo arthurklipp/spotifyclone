@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import api from '../../../api';
-import Modal from '../../../components/modal/modal';
+import api from '../../services/api';
+import Modal from '../modal/modal';
 import { Link } from 'react-router-dom';
 import './lateralBar.css';
 

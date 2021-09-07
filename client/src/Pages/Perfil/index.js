@@ -1,8 +1,8 @@
 import React from 'react';
-import Scroll from '../App/Scroll/scroll';
+import Scroll from '../../components/Scroll/scroll';
 import { CabecalhoPerfilPlaylist } from './cabecalhoPerfilPlaylist';
 import "./perfil.css";
-import api from "../../api";
+import api from "../../services/api";
 
 function UploadFoto(props) {
   return <item>
