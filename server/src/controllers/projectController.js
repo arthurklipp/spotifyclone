@@ -107,7 +107,7 @@ router.get('/playlist', async(req, res) => {
 
         return res.send({ playlist });
     }catch(err){
-        return res.status(400).send({error: 'creating new playlist'});
+        return res.status(400).send({error: 'get playlist'});
     }
 });
 
@@ -147,7 +147,7 @@ router.post('/musics/show', async(req, res) => {
 router.get('/playlists/:playlistId', async(req, res) => {
     try{
         const playlist = await Playlist.findOne({_id: req.params.playlistId}).populate(['user']);
-        const musicas = await Music.find({_id: {$in:playlist.musics}});
+        const musicas = await Music.find({_id: {$in:playlist.musics}}).populate(['playlist','assignedTo']);
 
         return res.send({ playlist, musicas });
     }catch(err){

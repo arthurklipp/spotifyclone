@@ -32,7 +32,8 @@ export default class Register extends React.Component {
               localStorage.setItem('fila', null);
             }
             
-            window.location.href="/";
+            this.props.history.push('/');
+            
         }catch(err){
             this.setState({
                 erro: 'Preencha todos os campos'

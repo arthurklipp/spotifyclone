@@ -33,7 +33,7 @@ export class Login extends Component {
         localStorage.setItem('fila', null);
       }
 
-      window.location.href="/";
+      this.props.history.push('/');
       
     } catch (err) {
       this.setState({

@@ -15,12 +15,14 @@ export default class Navbar extends React.Component {
                 <div className='textoBotao'>FAZER UPGRADE</div>
             </button>
             <Link to="/perfil/612b9a0159a8901690e4fddf">
-            <div className="d-flex">
-                <img id='foto' src={this.props.src} />
-                <p id='nome' className="branco">{this.props.user}</p>
-            </div>
+                <div className="d-flex">
+                    <img id='foto' src={this.props.src} />
+                    <p id='nome' className="branco">{this.props.user}</p>
+                </div>
             </Link>
-            <i id="seta" className="fas fa-chevron-down"></i>
+            <Link to="/login">
+                <i id="seta" className="fas fa-chevron-down"></i>
+            </Link>
         </div>
 
     }

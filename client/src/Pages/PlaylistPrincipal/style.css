@@ -3,52 +3,35 @@
     align-items: center;
     height: 70px;
     background-color: rgb(20, 20, 20);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     padding-left: 25px;
     padding-right: 25px;
 }
 
 .filaItem:hover{
-    display: flex;
-    align-items: center;
-    height: 70px;
     background-color: rgb(40, 40, 40);
-    color: white;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-.filaItem h6{
-    margin-right: 20px;
-    margin-bottom: 0px;
-    color: rgb(210, 210, 210);
 }
 
 .filaItem img{
     width: 45px;
     height: 45px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
-.textoFila{
-    height: 40px;
+.texto{
+    color: rgb(200, 200, 200);
 }
 
-.textoFila h6{
-    line-height: 20px;
-    margin-left: 20px;
+.titulo{
+    font-weight: 550;
 }
 
-#titulo{
-    color: rgb(255, 255, 255);
-    font-weight: 600;
-}
-
-.tempoItem{
-    margin-bottom: 0px;
-}
-
-#tituloAlbum{
-    margin-left: auto;
-    margin-right: 250px;
-    margin-bottom: 0px;
+.infos-musica{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-right: auto;
 }
