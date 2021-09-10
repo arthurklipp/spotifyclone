@@ -18,7 +18,7 @@ class CriarPlaylist extends Component {
   async criar() {
     try {
       await api.post('api/playlist', { title: this.state.titulo, description: this.state.descricao });
-      this.props.esconderModal();
+      window.location.reload();
     } catch (err) {
       this.setState({ erro: true });
     }

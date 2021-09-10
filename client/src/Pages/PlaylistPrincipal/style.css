@@ -35,3 +35,38 @@
     height: 100%;
     margin-right: auto;
 }
+
+.opcoes{
+    background-color: rgb(50, 50, 50);
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.opcoes p{
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    line-height: 0;
+    font-weight: bold;
+}
+
+.dropdown{
+    margin-left: 10px;
+    width: 150px;
+    background-color: rgb(40, 40, 40);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+.item:hover h6{
+    color: white;
+}

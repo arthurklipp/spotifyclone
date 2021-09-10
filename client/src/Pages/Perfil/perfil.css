@@ -4,7 +4,7 @@
     padding: 10px;
     padding-bottom: 20px;
     width: 1470px;
-    height: 300px;
+    height: 260px;
 }
 
 .headere img{
@@ -41,7 +41,7 @@
 
 item{
     width: 700px;
-    height: 360px;
+    height: 400px;
     background-color: rgb(40,40,40);
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .5), 0 6px 20px 0 rgba(0, 0, 0, .5);
