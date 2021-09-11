@@ -1,5 +1,6 @@
 const multer = require('multer');
 const path = require('path');
+const crypto = require('crypto');
 
 module.exports = {
     dest: path.resolve(__dirname, '..', '..', 'public', 'imgs', 'perfil'),
@@ -8,7 +9,11 @@ module.exports = {
             cb(null, path.resolve(__dirname, '..', '..', 'public', 'imgs', 'perfil'));
         },
         filename: (req, file, cb) => {
-            cb(null, file.originalname);
+            crypto.randomBytes(16, (err, hash)=>{
+                if(err) cb(err);
+                file.perfil = hash.toString("hex")+'-'+file.originalname;
+                cb(null, file.perfil);
+            });
         },
     }),
     limits: {
