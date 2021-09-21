@@ -3,6 +3,7 @@ import Scroll from '../../components/Scroll/scroll';
 import { CabecalhoPerfilPlaylist } from './cabecalhoPerfilPlaylist';
 import "./perfil.css";
 import api from "../../services/api";
+import { User } from '../../App';
 
 export class Perfil extends React.Component {
   constructor(props) {
@@ -16,25 +17,7 @@ export class Perfil extends React.Component {
         id: ''
       }]
     };
-    this.processUpload = this.processUpload.bind(this);
-    this.fileInput = React.createRef();
   }
-
-  processUpload(event) {
-    event.preventDefault();
-    const data = new FormData();
-
-    data.append("file", this.fileInput.current.files[0]);
-
-    api.post("api/post", data)
-      .then(response => {
-        localStorage.setItem('perfil', 'http://localhost:8080/api/imgs/' + response.data.perfil + '?jwt=Bearer ' + localStorage.getItem('login'));
-        window.location.reload();
-      })
-      .catch(() => {
-        console.log("erro");
-      });
-  };
 
   async componentDidMount() {
     try {
@@ -84,7 +67,16 @@ export class Perfil extends React.Component {
 
     return (
       <div id="content">
-        <CabecalhoPerfilPlaylist processUpload={this.processUpload} fileInput={this.fileInput} id={this.props.match.params.id} img={this.state.src} titulo="Perfil" nome={this.state.nome} subtitulo="1 playlist * 7 seguidores * 14 seguindo" />
+        {
+        this.props.match.params.id===localStorage.getItem('id')?
+        <User.Consumer>
+          {({img, upload, fileInput})=>(
+            <CabecalhoPerfilPlaylist processUpload={upload} fileInput={fileInput} id={this.props.match.params.id} img={img} titulo="Perfil" nome={this.state.nome} subtitulo="1 playlist * 7 seguidores * 14 seguindo" />
+          )}
+        </User.Consumer>
+        :
+        <CabecalhoPerfilPlaylist id={this.props.match.params.id} img={this.state.src} titulo="Perfil" nome={this.state.nome} subtitulo="1 playlist * 7 seguidores * 14 seguindo" />
+      }
         <Scroll header="Playlists" list={this.state.playlists} />
       </div>
     )

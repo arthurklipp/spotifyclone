@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { User } from '../../App';
 import './style.css';
 
 export default class Navbar extends React.Component {
@@ -16,7 +17,11 @@ export default class Navbar extends React.Component {
             </button>
             <Link to="/perfil/612b9a0159a8901690e4fddf">
                 <div className="d-flex">
-                    <img id='foto' src={this.props.src} />
+                    <User.Consumer>
+                        {({img})=>(
+                            <img id='foto' src={img} />
+                        )}
+                    </User.Consumer>
                     <p id='nome' className="branco">{this.props.user}</p>
                 </div>
             </Link>
