@@ -42,7 +42,6 @@
     align-items: center;
     padding-left: 10px;
     height: 40px;
-    cursor: pointer;
 }
 
 .opcoes p{
@@ -50,6 +49,7 @@
     font-size: 30px;
     line-height: 0;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .dropdown{

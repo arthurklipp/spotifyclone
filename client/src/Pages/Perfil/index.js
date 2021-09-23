@@ -1,6 +1,6 @@
 import React from 'react';
 import Scroll from '../../components/Scroll/scroll';
-import { CabecalhoPerfilPlaylist } from './cabecalhoPerfilPlaylist';
+import { CabecalhoPerfil } from './cabecalhoPerfil';
 import "./perfil.css";
 import api from "../../services/api";
 import { User } from '../../App';
@@ -71,11 +71,11 @@ export class Perfil extends React.Component {
         this.props.match.params.id===localStorage.getItem('id')?
         <User.Consumer>
           {({img, upload, fileInput})=>(
-            <CabecalhoPerfilPlaylist processUpload={upload} fileInput={fileInput} id={this.props.match.params.id} img={img} titulo="Perfil" nome={this.state.nome} subtitulo="1 playlist * 7 seguidores * 14 seguindo" />
+            <CabecalhoPerfil processUpload={upload} fileInput={fileInput} id={this.props.match.params.id} img={img} titulo="Perfil" nome={this.state.nome} subtitulo="1 playlist * 7 seguidores * 14 seguindo" />
           )}
         </User.Consumer>
         :
-        <CabecalhoPerfilPlaylist id={this.props.match.params.id} img={this.state.src} titulo="Perfil" nome={this.state.nome} subtitulo="1 playlist * 7 seguidores * 14 seguindo" />
+        <CabecalhoPerfil id={this.props.match.params.id} img={this.state.src} titulo="Perfil" nome={this.state.nome} subtitulo="1 playlist * 7 seguidores * 14 seguindo" />
       }
         <Scroll header="Playlists" list={this.state.playlists} />
       </div>

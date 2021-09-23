@@ -25,3 +25,8 @@ code {
 h6{
   color: rgb(200,200,200);
 }
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}

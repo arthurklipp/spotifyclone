@@ -15,11 +15,13 @@ export default class Navbar extends React.Component {
             <button type="button" id='botaoUpgrade' className="btn btn-primary btn-block rounded-pill font-weight-bold">
                 <div className='textoBotao'>FAZER UPGRADE</div>
             </button>
-            <Link to="/perfil/612b9a0159a8901690e4fddf">
+            <Link to={"/perfil/" + localStorage.getItem('id')}>
                 <div className="d-flex">
                     <User.Consumer>
-                        {({img})=>(
-                            <img id='foto' src={img} />
+                        {({ img }) => (
+                            <div id='foto'>
+                                <img src={img}/>
+                            </div>
                         )}
                     </User.Consumer>
                     <p id='nome' className="branco">{this.props.user}</p>

@@ -1,6 +1,6 @@
 import React from 'react';
 import LateralBar from './components/LateralBar/lateralBar';
-import Aside from './components/Aside/aside';
+import { Aside } from './components/Aside/aside';
 import Navbar from './components/Navbar/navbar';
 import Player from './components/Player/player';
 import { Home } from './Pages/Home';
@@ -14,7 +14,9 @@ export const User = React.createContext();
 export class App extends React.Component {
     constructor(props) {
         super(props);
+
         this.fileInput = React.createRef();
+        
         this.processUpload=(event)=> {
             event.preventDefault();
             const data = new FormData();
@@ -32,11 +34,13 @@ export class App extends React.Component {
                 console.log("erro");
               });
           };
+
         this.state = {
             img: localStorage.getItem('perfil'),
             upload: this.processUpload,
             fileInput: this.fileInput
         };
+
     }
     render() {
         return (

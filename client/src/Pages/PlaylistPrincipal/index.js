@@ -1,5 +1,5 @@
 import React from 'react';
-import { CabecalhoPerfilPlaylist } from '../Perfil/cabecalhoPerfilPlaylist';
+import { CabecalhoPlaylist } from './cabecalhoPlaylist';
 import "./style.css";
 import api from '../../services/api';
 
@@ -70,7 +70,7 @@ export class PlaylistPrincipal extends React.Component {
         }
         return (
             <div>
-                <CabecalhoPerfilPlaylist processUpload={this.processUpload} fileInput={this.fileInput} id={this.state.id} img={this.state.foto} titulo={this.state.tipo} nome={this.state.nome} subtitulo={this.state.autor + ', ' + this.state.musicas.length + ' musicas'} />
+                <CabecalhoPlaylist processUpload={this.processUpload} fileInput={this.fileInput} id={this.state.id} img={this.state.foto} titulo={this.state.tipo} nome={this.state.nome} subtitulo={this.state.autor + ', ' + this.state.musicas.length + ' musicas'} />
                 {opcoes}
                 <div id="fila">
                     <Musicas>
@@ -118,8 +118,8 @@ class Opcoes extends React.Component {
     render() {
         return (
             <div>
-                <div onClick={this.altDropdown} className="opcoes">
-                    <p>...</p>
+                <div className="opcoes">
+                    <p onClick={this.altDropdown}>...</p>
                 </div>
                 <Dropdown apagarPlaylist={this.props.funcao} display={this.state.dropdown}/>
             </div>

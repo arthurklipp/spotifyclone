@@ -7,12 +7,7 @@ export class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      musica: [{
-        album: '',
-        capa: '',
-        artista: '',
-        src: ''
-      }]
+      musica: []
     };
   }
 
@@ -76,6 +71,7 @@ export class Home extends React.Component {
     return (
       <div className="scroll">
         <Scroll header="Tocados recentemente" list={this.state.musica} />
+        <Scroll header="Tocados recentemente"/>
         <Scroll header="Rock" list={this.state.rock} tipo={1} />
         <Scroll header="Rap" list={this.state.rap} tipo={1} />
         <Scroll header="Brasil" list={this.state.brasil} tipo={1} />

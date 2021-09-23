@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from '../../components/modal/modal';
+import AlbumArt from '../../components/AlbumArt/AlbumArt';
 
 function UploadFoto(props) {
     return (
@@ -14,10 +15,10 @@ function UploadFoto(props) {
     )
 }
 
-export function CabecalhoPerfilPlaylist(props) {
+export function CabecalhoPlaylist(props) {
     return (
         <div className="headere">
-            <HeaderImg processUpload={props.processUpload} fileInput={props.fileInput} id={props.id} img={props.img} titulo={props.titulo} />
+            <HeaderImg processUpload={props.processUpload} id={props.id} fileInput={props.fileInput} img={props.img}/>
             <div className="infosPerfil">
                 <p className='texto font-weight-bold'>{props.titulo}</p>
                 <h1>{props.nome}</h1>
@@ -50,18 +51,21 @@ class HeaderImg extends React.Component {
     }
 
     render() {
-        let header;
-
-        if (this.props.id === localStorage.getItem('id')) {
-            header = <div>
+        //operador ternario para renderizar o header com ou sem o modal
+        let header = this.props.id === localStorage.getItem('id') ?
+            <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Modal show={this.state.modal} alternarModal={this.esconderModal}>
                     <UploadFoto img={this.props.img} processUpload={this.props.processUpload} fileInput={this.props.fileInput} />
                 </Modal>
-                <img onClick={this.alternarModal} src={this.props.img} id={this.props.titulo} />
-            </div>;
-        } else {
-            header = <div><img src={this.props.img} id={this.props.titulo} /></div>;
-        }
+                <AlbumArt tam='230'>
+                    <img src={this.props.img} onClick={this.alternarModal} />
+                </AlbumArt>
+            </div> :
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <AlbumArt tam='230'>
+                    <img src={this.props.img} />
+                </AlbumArt>
+            </div>
 
         return header
     }

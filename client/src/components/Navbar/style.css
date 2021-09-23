@@ -48,7 +48,15 @@ pesquisa input{
 
 #foto{
     width: 30px;
+    height: 30px;
     border-radius: 15px;
     margin-right: 10px;
     margin-left: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+#foto img{
+    height: 100%;
 }
