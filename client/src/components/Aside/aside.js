@@ -75,31 +75,7 @@ const amigos = [
         foto: localStorage.getItem('perfil'),
         musica: 'Medo da chuva',
         artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Joaquina',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Joaquina',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Joaquina',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Joaquina',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
+    }
 ];
 
 function Amigos(props) {
@@ -109,7 +85,7 @@ function Amigos(props) {
                 <h5 className='font-weight-bold text-light'>Lista de amigos</h5>
             </div>
             {props.amigos.map((usuario) =>
-                <div className='usuario'>
+                <div key={usuario.nome} className='usuario'>
                     <Avatar tam='45'>
                         <img src={usuario.foto}/>
                     </Avatar>
