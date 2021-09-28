@@ -9,6 +9,7 @@
     background-color: transparent;
     border: none;
     font-weight: bold;
+    width: 90%;
 }
 
 textarea:focus, input:focus, select:focus {
@@ -24,10 +25,10 @@ textarea:focus, input:focus, select:focus {
     position: absolute;
     min-width: 300px;
     width: 30%;
-    height: 50vh;
-    z-index: 1;
+    max-height: 50vh;
+    z-index: 2;
     overflow: auto;
-    scrollbar-width: none;
+    scrollbar-width: thin;
 }
 
 .item{

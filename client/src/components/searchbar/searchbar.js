@@ -59,51 +59,81 @@ const musics = [
         album: 'Facelift',
         titulo: 'Man In The Box',
         artista: "Alice In Chains"
-    },
+    }
 ];
 
 const artists = [
     {
-        foto: 'http://localhost:8080/api/imgs/alice in chains.jpg?jwt=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmI5YTAxNTlhODkwMTY5MGU0ZmRkZiIsImlhdCI6MTYzMjY2MTMxOSwiZXhwIjoxNjMyNzQ3NzE5fQ.HRlK6p3oLUcDVhVrmo4ZAbVe9ldpZhc9bcceJWA8LkY',
+        foto: 'http://localhost:8080/api/imgs/alice in chains.jpg?jwt=Bearer ' + localStorage.getItem('login'),
         nome: 'Alice In Chains'
     },
     {
-        foto: 'http://localhost:8080/api/imgs/radiohead.jpg?jwt=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmI5YTAxNTlhODkwMTY5MGU0ZmRkZiIsImlhdCI6MTYzMjY2MTMxOSwiZXhwIjoxNjMyNzQ3NzE5fQ.HRlK6p3oLUcDVhVrmo4ZAbVe9ldpZhc9bcceJWA8LkY',
+        foto: 'http://localhost:8080/api/imgs/radiohead.jpg?jwt=Bearer ' + localStorage.getItem('login'),
         nome: 'Radiohead'
     }
 ];
 
-export default function Searchbar(props) {
+export default class Searchbar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: ''
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        if (e.target.value) {
+            this.setState({
+                text: e.target.value,
+                data: { musics, artists }
+            });
+        } else {
+            this.setState({
+                text: e.target.value,
+                data: null
+            });
+        }
+    }
+
+    render() {
+        return (
+            <div className={style.main}>
+                <div className={style.searchbar}>
+                    <i className="fas fa-search" style={{ color: 'black' }} />
+                    <input placeholder="Buscar" onChange={this.handleChange} value={this.state.text} />
+                </div>
+                {this.state.data ? <Results musics={this.state.data.musics} artists={this.state.data.artists} /> : null}
+            </div>
+        )
+    }
+}
+
+function Results(props) {
     return (
-        <div className={style.main}>
-            <div className={style.searchbar}>
-                <i className="fas fa-search" style={{ color: 'black' }} />
-                <input placeholder="Buscar" />
-            </div>
-            <div className={style.results}>
-                {musics.map((music, index) => (
-                    <div className={style.item} key={index}>
-                        <AlbumArt tam='60'>
-                            <img src={music.capa} />
-                        </AlbumArt>
-                        <div className={style.infos}>
-                            <h5>{music.titulo}</h5>
-                            <h6>{music.album}</h6>
-                            <h6>{music.artista}</h6>
-                        </div>
+        <div className={style.results}>
+            {props.musics.map((music, index) => (
+                <div className={style.item} key={index}>
+                    <AlbumArt tam='60'>
+                        <img src={music.capa} />
+                    </AlbumArt>
+                    <div className={style.infos}>
+                        <h5>{music.titulo}</h5>
+                        <h6>{music.album}</h6>
+                        <h6>{music.artista}</h6>
                     </div>
-                ))}
-                {artists.map((artist, index) => (
-                    <div className={style.item} key={index}>
-                        <Avatar tam='60'>
-                            <img src={artist.foto}/>
-                        </Avatar>
-                        <div className={style.infos}>
-                            <h5>{artist.nome}</h5>
-                        </div>
+                </div>
+            ))}
+            {props.artists.map((artist, index) => (
+                <div className={style.item} key={index}>
+                    <Avatar tam='60'>
+                        <img src={artist.foto} />
+                    </Avatar>
+                    <div className={style.infos}>
+                        <h5>{artist.nome}</h5>
                     </div>
-                ))}
-            </div>
+                </div>
+            ))}
         </div>
     )
 }
