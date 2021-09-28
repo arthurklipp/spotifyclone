@@ -2,6 +2,7 @@ import React from "react";
 import AlbumArt from "../AlbumArt/AlbumArt";
 import Avatar from "../Avatar/avatar";
 import style from './style.module.css';
+import OnClickOut from "react-onclickoutside";
 
 const musics = [
     {
@@ -73,13 +74,14 @@ const artists = [
     }
 ];
 
-export default class Searchbar extends React.Component {
+class Searchbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             text: ''
         };
         this.handleChange = this.handleChange.bind(this);
+        this.apagarDados = this.apagarDados.bind(this);
     }
 
     handleChange(e) {
@@ -89,11 +91,21 @@ export default class Searchbar extends React.Component {
                 data: { musics, artists }
             });
         } else {
-            this.setState({
-                text: e.target.value,
-                data: null
-            });
+            this.apagarDados();
         }
+    }
+
+    apagarDados(){
+        this.setState({
+            text:'',
+            data: null
+        });
+    }
+
+    handleClickOutside(){
+        this.setState({
+            data: null
+        });
     }
 
     render() {
@@ -108,6 +120,7 @@ export default class Searchbar extends React.Component {
         )
     }
 }
+export default OnClickOut(Searchbar);
 
 function Results(props) {
     return (
