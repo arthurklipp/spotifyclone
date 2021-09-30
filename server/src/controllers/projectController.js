@@ -113,7 +113,7 @@ router.get('/playlist', async(req, res) => {
 
 router.get('/search/:word', async(req, res)=>{
     try {
-        const music = await Music.find({title:{$regex:'^'+req.params.word, $options:'i'}}).limit(10);
+        const music = await Music.find({title:{$regex:'^'+req.params.word, $options:'i'}}).limit(10).populate(['playlist', 'assignedTo']);
         const artists = await User.find({name:{$regex:'^'+req.params.word, $options:'i'}}).limit(5);
         return res.send({music, artists});
     } catch (error) {

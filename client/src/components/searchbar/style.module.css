@@ -43,6 +43,7 @@ textarea:focus, input:focus, select:focus {
 
 .infos{
     padding-left: 10px;
+    width: 80%;
 }
 
 .infos h5{
