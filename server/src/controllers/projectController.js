@@ -111,6 +111,16 @@ router.get('/playlist', async(req, res) => {
     }
 });
 
+router.get('/search/:word', async(req, res)=>{
+    try {
+        const music = await Music.find({title:{$regex:'^'+req.params.word, $options:'i'}}).limit(10);
+        const artists = await User.find({name:{$regex:'^'+req.params.word, $options:'i'}}).limit(5);
+        return res.send({music, artists});
+    } catch (error) {
+        return res.status(400).send({error: 'no music find'});
+    }
+});
+
 router.get('/:userId', async(req, res) => {
     try{
         const playlists = await Playlist.find({user: req.params.userId});
