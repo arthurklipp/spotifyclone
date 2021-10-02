@@ -25,6 +25,12 @@ const UserSchema = new mongoose.Schema({
         required: true,
         select: false,
     },
+    following:[{
+        type: String
+    }],
+    followers:[{
+        type: String
+    }],
     passwordResetToken:{
         type: String,
         select: false,

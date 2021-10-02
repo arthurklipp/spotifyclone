@@ -51,12 +51,9 @@ router.post('/login', async (req, res) =>{
     
     user.password = undefined;
 
-    var queue = await Playlist.findOne({user: user.id, title: 'queue'}).populate(['musics']);
-
     res.send({
         user, 
-        token: generateToken({id: user.id}),
-        queue
+        token: generateToken({id: user.id})
     });
 });
 
