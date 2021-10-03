@@ -21,7 +21,7 @@ export class Perfil extends React.Component {
 
   async componentDidMount() {
     try {
-      const res = await api.get('/api/' + this.props.match.params.id);
+      const res = await api.get('/api/listplaylist/' + this.props.match.params.id);
 
       this.setState({
         src: 'http://localhost:8080/api/imgs/' + res.data.user.perfil + '?jwt=Bearer ' + localStorage.getItem('login'),
@@ -45,7 +45,7 @@ export class Perfil extends React.Component {
     }
 
     try {
-      const res = await api.get('/api/' + this.props.match.params.id);
+      const res = await api.get('/api/listplaylist/' + this.props.match.params.id);
 
       this.setState({
         src: 'http://localhost:8080/api/imgs/' + res.data.user.perfil + '?jwt=Bearer ' + localStorage.getItem('login'),

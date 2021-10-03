@@ -174,8 +174,9 @@ router.get('/searchuser/:name', async (req, res) => {
     }
 });
 
-router.post('/follow', async (req, res) => {
-    const resp = await User.find({ _id: { $in: req.body.users } }, { email: 0, following: 0, followers: 0, createdAt: 0 });
+router.get('/follow', async (req, res) => {
+    const user = await User.findById(req.userId);
+    const resp = await User.find({ _id: { $in: user.following } }, { email: 0, following: 0, followers: 0, createdAt: 0 });
     return res.send({ resp });
 });
 

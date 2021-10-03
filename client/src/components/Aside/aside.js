@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
 import "./aside.css";
 import Avatar from '../Avatar/avatar';
+import api from '../../services/api';
+import { Link } from 'react-router-dom';
 
-export function Aside(props) {
-    return (
-        true === false ? <SemAmigos /> : <Amigos amigos={amigos} />
-    )
+export class Aside extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            following: []
+        };
+    }
+
+    async componentDidMount() {
+        const following = await api.get('/api/follow');
+
+        this.setState({
+            following: following.data.resp
+        });
+    }
+    render() {
+        return (
+            this.state.following[0] ? <Amigos amigos={this.state.following} /> : <SemAmigos />
+        )
+    }
 }
 
 function SemAmigos(props) {
@@ -21,78 +39,27 @@ function SemAmigos(props) {
     )
 }
 
-const amigos = [
-    {
-        nome: 'Arthur',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Joao',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Pedrao',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Antonio',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Rafaela',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Pietra',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Gabriela',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Maria',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    },
-    {
-        nome: 'Joaquina',
-        foto: localStorage.getItem('perfil'),
-        musica: 'Medo da chuva',
-        artista: 'Raul Seixas'
-    }
-];
-
 function Amigos(props) {
+
+    const url = localStorage.getItem('URL');
+    const token = '?jwt=Bearer ' + localStorage.getItem('login');
+
     return (
         <div className='amigos'>
-            <div className="d-flex mt-1 align-items-center justify-content-center" style={{height:'50px'}}>
+            <div className="d-flex mt-1 align-items-center justify-content-center" style={{ height: '50px' }}>
                 <h5 className='font-weight-bold text-light'>Lista de amigos</h5>
             </div>
             {props.amigos.map((usuario) =>
-                <div key={usuario.nome} className='usuario'>
+                <div key={usuario.name} className='usuario'>
                     <Avatar tam='45'>
-                        <img src={usuario.foto}/>
+                        <img src={url + usuario.perfil + token} />
                     </Avatar>
                     <div style={{ display: 'block' }}>
-                        <div className='textoAlbum mb-1'>{usuario.nome}</div>
-                        <h6>{usuario.musica}</h6>
-                        <h6>{usuario.artista}</h6>
+                        <Link to={'/perfil/' + usuario._id}>
+                            <div className='textoAlbum mb-1'>{usuario.name}</div>
+                        </Link>
+                        <h6>Medo da chuva</h6>
+                        <h6>Raul Seixas</h6>
                     </div>
                 </div>
             )}

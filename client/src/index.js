@@ -18,6 +18,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   )} />
 )
 
+localStorage.setItem('URL', 'http://localhost:8080/api/imgs/');
+
 ReactDOM.render(
   <BrowserRouter>
     <Switch>

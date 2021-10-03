@@ -20,7 +20,7 @@ class Searchbar extends React.Component {
     handleChange(e) {
         if (e.target.value) {
             this.setState({
-                text:e.target.value
+                text: e.target.value
             });
             this.buscarDados(e.target.value);
         } else {
@@ -28,7 +28,7 @@ class Searchbar extends React.Component {
         }
     }
 
-    async buscarDados(e){
+    async buscarDados(e) {
         try {
             const res = await api.get('/api/search/' + e);
             const musics = res.data.music;
@@ -69,12 +69,16 @@ class Searchbar extends React.Component {
 export default OnClickOut(Searchbar);
 
 function Results(props) {
+
+    const url = localStorage.getItem('URL');
+    const token = '?jwt=Bearer ' + localStorage.getItem('login');
+
     return (
         <div className={style.results}>
             {props.musics.map((music, index) => (
                 <div className={style.item} key={index}>
                     <AlbumArt tam='60'>
-                        <img src={'http://localhost:8080/api/imgs/'+music.playlist.img+'?jwt=Bearer ' + localStorage.getItem('login')}/>
+                        <img src={url + music.playlist.img + token} />
                     </AlbumArt>
                     <div className={style.infos}>
                         <h5 className='text-truncate'>{music.title}</h5>
@@ -86,7 +90,7 @@ function Results(props) {
             {props.artists.map((artist, index) => (
                 <div className={style.item} key={index}>
                     <Avatar tam='60'>
-                        <img src={'http://localhost:8080/api/imgs/'+artist.perfil+'?jwt=Bearer ' + localStorage.getItem('login')}/>
+                        <img src={url + artist.perfil + token} />
                     </Avatar>
                     <div className={style.infos}>
                         <h5>{artist.name}</h5>
