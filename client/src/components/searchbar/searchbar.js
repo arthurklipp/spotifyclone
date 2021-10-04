@@ -4,6 +4,7 @@ import Avatar from "../Avatar/avatar";
 import style from './style.module.css';
 import OnClickOut from "react-onclickoutside";
 import api from '../../services/api';
+import { Link } from "react-router-dom";
 
 
 class Searchbar extends React.Component {
@@ -88,14 +89,16 @@ function Results(props) {
                 </div>
             ))}
             {props.artists.map((artist, index) => (
-                <div className={style.item} key={index}>
-                    <Avatar tam='60'>
-                        <img src={url + artist.perfil + token} />
-                    </Avatar>
-                    <div className={style.infos}>
-                        <h5>{artist.name}</h5>
+                <Link to={'/perfil/'+artist._id}>
+                    <div className={style.item} key={index}>
+                        <Avatar tam='60'>
+                            <img src={url + artist.perfil + token} />
+                        </Avatar>
+                        <div className={style.infos}>
+                            <h5>{artist.name}</h5>
+                        </div>
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
     )

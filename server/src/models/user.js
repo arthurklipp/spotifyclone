@@ -10,10 +10,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: false,
     },
-    genero:{
+    genero:[{
         type: String,
         require: false,
-    },
+    }],
     email:{
         type: String,
         require: true,
